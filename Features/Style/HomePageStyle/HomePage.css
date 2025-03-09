@@ -9,7 +9,6 @@ body {
   background-color: #ffffff;
 }
 
-/* Header Styles */
 .header {
   display: flex;
   justify-content: space-between;
@@ -34,11 +33,13 @@ body {
 .join-game-content {
   display: flex;
   align-items: center;
-  gap: 30rem;
+  justify-content: space-between;
   background-color: #e0f7f7;
   padding: 0.8rem 1.5rem;
   border-radius: 10px;
+  width: 100%;
   min-width: 400px;
+  gap: clamp(2rem, 20vw, 30rem);
 }
 
 .join-game-content h1 {
@@ -55,6 +56,7 @@ body {
   width: 200px;
   font-size: 1rem;
   outline: none;
+  text-align: center;
 }
 
 .search-btn {
@@ -67,7 +69,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: auto;
+  /* margin-left: auto; */
   transition: all 0.2s ease-in-out;
   box-shadow: 0 4px 0 #e69500;
   position: relative;
@@ -118,6 +120,9 @@ body {
   padding: 2rem;
   display: flex;
   justify-content: center;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
 }
 
 .play-card {
@@ -137,6 +142,10 @@ body {
   align-items: center;
   gap: 1rem;
   padding: 20px;
+}
+
+.play-content h2 {
+  font-size: 1.5rem;
 }
 
 .bot-icon img {
@@ -162,6 +171,7 @@ body {
   box-shadow: 0 4px 0 #a1febe;
   position: relative;
   top: 0;
+  font-size: 1rem;
 }
 
 .generate-btn:hover {
@@ -175,6 +185,7 @@ body {
   box-shadow: 0 0 0 #9af2b5;
   background-color: #95eaa7;
 }
+
 /* Quiz Sections */
 .quiz-section {
   padding: 2rem 5rem;
@@ -250,7 +261,7 @@ footer {
   }
 
   .join-game-content {
-    gap: 15rem;
+    gap: clamp(2rem, 15vw, 20rem);
   }
 }
 
@@ -269,6 +280,7 @@ footer {
     gap: 2rem;
     width: 100%;
     justify-content: space-between;
+    min-width: auto;
   }
 
   .pin-input {
@@ -356,22 +368,446 @@ footer {
   }
 }
 
-/* Thêm một số hiệu ứng hover cho quiz cards */
-.quiz-card {
+.quiz-image {
   transition: transform 0.2s ease-in-out;
 }
 
-.quiz-card:hover {
+.quiz-image:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Cải thiện khả năng đọc trên màn hình nhỏ */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .header {
+    padding: 1.5rem 4rem;
+  }
+
+  .logo img {
+    width: 130px;
+  }
+
+  .join-game-content {
+    padding: 1rem 2rem;
+    min-width: 500px;
+  }
+
+  .join-game-content h1 {
+    font-size: 1.4rem;
+  }
+
+  .pin-input {
+    width: 250px;
+    padding: 1rem 1.5rem;
+    font-size: 1.2rem;
+  }
+
+  .search-btn {
+    width: 50px;
+    height: 50px;
+  }
+
+  .signin-btn {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+  }
+
+  .quiz-section {
+    padding: 3rem 6rem;
+  }
+
+  .quiz-section h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .quiz-grid {
+    gap: 2rem;
+  }
+
+  .quiz-card {
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .quiz-image {
+    height: 180px;
+  }
+
+  .quiz-info {
+    padding: 1.5rem;
+  }
+
+  .quiz-info h4 {
+    font-size: 1.3rem;
+  }
+
+  .quiz-meta {
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+
+  .hero {
+    padding: 3rem;
+  }
+
+  .play-card {
+    padding: 3rem;
+    max-width: 600px;
+    gap: 2rem;
+    border-radius: 20px;
+  }
+
+  .play-content {
+    gap: 1.5rem;
+    padding: 25px;
+  }
+
+  .play-content h2 {
+    font-size: 2rem;
+  }
+
+  .bot-icon img {
+    width: 130px;
+    height: 130px;
+    border-radius: 20px;
+  }
+
+  .generate-btn {
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    margin-top: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .header {
+    padding: 2rem 6rem;
+  }
+
+  .logo img {
+    width: 150px;
+  }
+
+  .join-game-content {
+    padding: 1.2rem 2.5rem;
+    min-width: 600px;
+  }
+
+  .join-game-content h1 {
+    font-size: 1.6rem;
+  }
+
+  .pin-input {
+    width: 300px;
+    padding: 1.2rem 1.8rem;
+    font-size: 1.4rem;
+  }
+
+  .search-btn {
+    width: 60px;
+    height: 60px;
+  }
+
+  .signin-btn {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.4rem;
+  }
+
+  .quiz-section {
+    padding: 4rem 8rem;
+  }
+
+  .quiz-section h3 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .quiz-grid {
+    gap: 2.5rem;
+  }
+
+  .quiz-image {
+    height: 200px;
+  }
+
+  .quiz-info {
+    padding: 1.8rem;
+  }
+
+  .quiz-info h4 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .quiz-meta {
+    font-size: 1.1rem;
+    margin-top: 1.2rem;
+    gap: 1rem;
+  }
+
+  .hero {
+    padding: 4rem;
+  }
+
+  .play-card {
+    padding: 4rem;
+    max-width: 700px;
+    gap: 3rem;
+    border-radius: 25px;
+  }
+
+  .play-content {
+    gap: 2rem;
+    padding: 30px;
+  }
+
+  .play-content h2 {
+    font-size: 2.4rem;
+  }
+
+  .bot-icon img {
+    width: 160px;
+    height: 160px;
+    border-radius: 25px;
+  }
+
+  .generate-btn {
+    padding: 1.2rem 3rem;
+    font-size: 1.4rem;
+    border-radius: 35px;
+    margin-top: 2rem;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .header {
+    padding: 2.5rem 8rem;
+  }
+
+  .logo img {
+    width: 180px;
+  }
+
+  .join-game-content {
+    padding: 1.5rem 3rem;
+    min-width: 700px;
+  }
+
+  .join-game-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .pin-input {
+    width: 350px;
+    padding: 1.5rem 2rem;
+    font-size: 1.6rem;
+  }
+
+  .search-btn {
+    width: 70px;
+    height: 70px;
+  }
+
+  .search-btn img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .signin-btn {
+    padding: 1.5rem 3rem;
+    font-size: 1.6rem;
+  }
+
+  .quiz-section {
+    padding: 5rem 10rem;
+  }
+
+  .quiz-section h3 {
+    font-size: 2.2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .quiz-grid {
+    gap: 3rem;
+  }
+
+  .quiz-image {
+    height: 220px;
+  }
+
+  .quiz-info {
+    padding: 2rem;
+  }
+
+  .quiz-info h4 {
+    font-size: 1.7rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .quiz-meta {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    gap: 1.2rem;
+  }
+
+  .hero {
+    padding: 5rem;
+  }
+
+  .play-card {
+    padding: 5rem;
+    max-width: 800px;
+    gap: 4rem;
+    border-radius: 30px;
+  }
+
+  .play-content {
+    gap: 2.5rem;
+    padding: 35px;
+  }
+
+  .play-content h2 {
+    font-size: 2.8rem;
+  }
+
+  .bot-icon img {
+    width: 200px;
+    height: 200px;
+    border-radius: 30px;
+  }
+
+  .generate-btn {
+    padding: 1.5rem 4rem;
+    font-size: 1.6rem;
+    border-radius: 40px;
+    margin-top: 2.5rem;
+  }
+}
+
+@media screen and (min-width: 2048px) {
+  .header {
+    padding: 3rem 10rem;
+  }
+
+  .logo img {
+    width: 190px;
+  }
+
+  .join-game-content {
+    padding: 1.8rem 3.5rem;
+    min-width: 750px;
+  }
+
+  .join-game-content h1 {
+    font-size: 2rem;
+  }
+
+  .pin-input {
+    width: 380px;
+    padding: 1.8rem 2.2rem;
+    font-size: 1.8rem;
+  }
+
+  .search-btn {
+    width: 75px;
+    height: 75px;
+  }
+
+  .search-btn img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .signin-btn {
+    padding: 1.8rem 3.5rem;
+    font-size: 1.8rem;
+  }
+
+  .quiz-section {
+    padding: 6rem 12rem;
+    max-width: 2048px;
+    margin: 0 auto;
+  }
+
+  .quiz-section h3 {
+    font-size: 2.4rem;
+    margin-bottom: 3rem;
+  }
+
+  .quiz-grid {
+    gap: 3.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  .quiz-image {
+    height: 240px;
+  }
+
+  .quiz-info {
+    padding: 2.2rem;
+  }
+
+  .quiz-info h4 {
+    font-size: 1.9rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .quiz-meta {
+    font-size: 1.3rem;
+    margin-top: 1.6rem;
+    gap: 1.4rem;
+  }
+
+  .hero {
+    padding: 6rem;
+  }
+
+  .play-card {
+    padding: 6rem;
+    max-width: 900px;
+    gap: 4.5rem;
+    border-radius: 35px;
+  }
+
+  .play-content {
+    gap: 3rem;
+    padding: 40px;
+  }
+
+  .play-content h2 {
+    font-size: 3rem;
+  }
+
+  .bot-icon img {
+    width: 220px;
+    height: 220px;
+    border-radius: 35px;
+  }
+
+  .generate-btn {
+    /* padding: 1.8rem 4.5rem; */
+    font-size: 1.8rem;
+    border-radius: 45px;
+    margin-top: 3rem;
+  }
+
+  /* Footer */
+  footer {
+    padding: 2.2rem;
+  }
+
+  .footer-content {
+    font-size: 1.3rem;
+    gap: 1.4rem;
   }
 }
