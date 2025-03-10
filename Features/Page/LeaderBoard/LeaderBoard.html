@@ -1,70 +1,78 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quizy</title>
+    <title>Quiz Leaderboard</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"
+    />
     <link rel="stylesheet" href="../../Style/LeaderBoard/LeaderBoard.css" />
   </head>
   <body>
-    <header class="header">
-      <div class="quiz-header">
-        <div>Quiz topic</div>
-        <div>Question: 10/10</div>
+    <div class="container">
+      <!-- Quiz Info -->
+      <div class="quiz-info">
+        <h1 id="quizTitle">Quiz Title</h1>
+        <p id="quizDescription">Quiz Description</p>
       </div>
-    </header>
 
-    <nav class="navigation">
-      <button class="back-button" onclick="window.location.href='../HomePage/HomPage.html'">Back to home</button>
-    </nav>
-
-    <main>
-      <section class="leaderboard-section">
-        <div class="leaderboard-container">
-          <h2 class="leaderboard-title">Leader board</h2>
-          <ul class="player-list">
-            <li class="player-item rank-1">
-              <span class="player-rank">1</span>
-              <div class="player-avatar"></div>
-              <span class="player-name">Name Player</span>
-              <span class="player-score">3000</span>
-            </li>
-            <li class="player-item rank-2">
-              <span class="player-rank">2</span>
-              <div class="player-avatar"></div>
-              <span class="player-name">Name Player</span>
-              <span class="player-score">3000</span>
-            </li>
-            <li class="player-item rank-3">
-              <span class="player-rank">3</span>
-              <div class="player-avatar"></div>
-              <span class="player-name">Name Player</span>
-              <span class="player-score">3000</span>
-            </li>
-            <li class="player-item rank-4">
-              <span class="player-rank">4</span>
-              <div class="player-avatar"></div>
-              <span class="player-name">Name Player</span>
-              <span class="player-score">3000</span>
-            </li>
-            <li class="player-item rank-5">
-              <span class="player-rank">5</span>
-              <div class="player-avatar"></div>
-              <span class="player-name">Name Player</span>
-              <span class="player-score">3000</span>
-            </li>
-          </ul>
-          <p class="rank-message">You were ranked 3th!</p>
+      <!-- Top Players Section -->
+      <div class="leaderboard-section">
+        <h2>Top Players 🏆</h2>
+        <div class="leaderboard-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Score</th>
+                <th>Time</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboardBody">
+              <!-- Will be populated by JavaScript -->
+            </tbody>
+          </table>
         </div>
-      </section>
+      </div>
 
-      <section class="score-section">
-        <div class="score-summary">
-          <span class="correct-score">8/10</span>
-          <span class="wrong-score">2/10</span>
-          <span class="total-score">2400</span>
+      <!-- Your Results Section -->
+      <div class="results-section">
+        <h2>Your Results</h2>
+        <div class="results-summary">
+          <div class="summary-item">
+            <span class="label">Final Score</span>
+            <span class="value" id="finalScore">0</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">Correct Answers</span>
+            <span class="value" id="correctAnswers">0/0</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">Time Taken</span>
+            <span class="value" id="timeTaken">0:00</span>
+          </div>
         </div>
-      </section>
-    </main>
+
+        <!-- Detailed Results -->
+        <div class="detailed-results">
+          <h3>Question Details</h3>
+          <div class="questions-container" id="questionsContainer">
+            <!-- Will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="btn play-again" onclick="playAgain()">Play Again</button>
+        <button class="btn home" onclick="goHome()">Back to Home</button>
+      </div>
+    </div>
+
+    <script src="LeaderBoard.js"></script>
   </body>
 </html>
