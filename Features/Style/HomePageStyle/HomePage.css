@@ -1,190 +1,4 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Nunito', sans-serif;
-  }
-  
-  body {
-    background-color: #ffffff;
-  }
-  
-  /* Header Styles */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: #ffffff;
-    border-bottom: 1px solid #e0e0e0;
-  }
-  
-  .logo img {
-    width: 100px;
-  }
-  
-  .join-game {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex: 0.9;
-    justify-content: center;
-  }
-  
-  .join-game-content {
-    display: flex;
-    align-items: center;
-    gap: 30rem;
-    background-color: #e0f7f7;
-    padding: 0.8rem 1.5rem;
-    border-radius: 10px;
-    min-width: 400px;
-  }
-  
-  .join-game-content h1 {
-    font-size: 1.2rem;
-    color: #000;
-    white-space: nowrap;
-  }
-  
-  .pin-input {
-    padding: 0.8rem 1rem;
-    border: none;
-    border-radius: 25px;
-    background-color: #ffffff;
-    width: 200px;
-    font-size: 1rem;
-    outline: none;
-  }
-  
-  .search-btn {
-    background-color: #ffa500;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: auto;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0 4px 0 #e69500;
-    position: relative;
-    top: 0;
-  }
-  
-  .search-btn:hover {
-    background-color: #ff9100;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 0 #e69500;
-  }
-  
-  .search-btn:active {
-    transform: translateY(4px);
-    box-shadow: 0 0 0 #e69500;
-    background-color: #f08800;
-  }
-  
-  .signin-btn {
-    background-color: #ffa500;
-    color: #000000;
-    border: none;
-    border-radius: 25px;
-    padding: 0.8rem 1.5rem;
-    font-weight: bold;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0 4px 0 #e69500;
-    position: relative;
-    top: 0;
-  }
-  
-  .signin-btn:hover {
-    background-color: #ff9100;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 0 #e69500;
-  }
-  
-  .signin-btn:active {
-    transform: translateY(4px);
-    box-shadow: 0 0 0 #e69500;
-    background-color: #f08800;
-  }
-  
-  /* Hero Section */
-  .hero {
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .play-card {
-    display: flex;
-    align-items: center;
-    background-color: #e0f7f7;
-    padding: 2rem;
-    border-radius: 15px;
-    text-align: center;
-    max-width: 500px;
-    gap: 1rem;
-  }
-  
-  .play-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 20px;
-  }
-  
-  .bot-icon img {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    margin: 0 auto;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .generate-btn {
-    background-color: #a1febe;
-    border: none;
-    border-radius: 25px;
-    padding: 0.8rem 2rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 1rem;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0 4px 0 #a1febe;
-    position: relative;
-    top: 0;
-  }
-  
-  .generate-btn:hover {
-    background-color: #a1febe;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 0 #9af2b5;
-  }
-  
-  .generate-btn:active {
-    transform: translateY(4px);
-    box-shadow: 0 0 0 #9af2b5;
-    background-color: #95eaa7;
-  }
-  /* Quiz Sections */
-  .quiz-section {
-    padding: 2rem 5rem;
-  }
-  
-  .quiz-section h3 {
-    margin-bottom: 1rem;
-    margin-left: -1rem;
-  }
-  
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -437,6 +251,79 @@ footer {
 
 .footer-content a:hover {
   text-decoration: underline;
+}
+
+.modal {
+  display: flex;
+  visibility: hidden;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #B4EBE6;
+  padding: clamp(15px, 4vw, 20px);
+  border: 1px solid #888;
+  border-radius: 25px;
+  width: 90%;
+  max-width: 400px;
+  margin: 20px;
+}
+
+.modal h2 {
+    text-align: center;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.modal .google-btn{
+  gap: 10px;
+  padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+  width: min(60%, 300px);
+  margin-bottom: 10px;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25), inset 0 -4px 0 rgba(0, 0, 0, 0.20);
+  transition: box-shadow 0.3s ease;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  &:active {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.25), inset 0 0 4px rgba(0, 0, 0, 0.20);
+  }
+}
+
+.modal .google-btn img {
+  width: clamp(20px, 4vw, 24px);
+  height: clamp(20px, 4vw, 24px);
+  vertical-align: middle;
+}
+
+.close {
+  color: #aaaaaa;
+  font-size: clamp(16px, 3vw, 20px);
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+    cursor: pointer;
 }
 
 /* Responsive Design */
@@ -995,102 +882,5 @@ footer {
   .footer-content {
     font-size: 1.3rem;
     gap: 1.4rem;
-  }
-  
-  .footer-content a {
-    color: #666666;
-    text-decoration: none;
-  }
-  
-  .footer-content a:hover {
-    text-decoration: underline;
-  }
-  /* modal */
-  /* modal dark background */
-  .modal {
-    display: flex;
-    visibility: hidden;
-    position: fixed;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.4);
-  }
-  /* This is the content of the modal*/
-  .modal-content {
-    background-color: #B4EBE6;
-    padding: clamp(15px, 4vw, 20px);
-    border: 1px solid #888;
-    border-radius: 25px;
-    width: 90%;
-    max-width: 400px;
-    margin: 20px;
-  }
-  
-  .modal h2 {
-    text-align: center;
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .flex-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-  }
-  
-  .modal .google-btn{
-    gap: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: white;
-    cursor: pointer;
-    width: min(60%, 300px);
-    margin-bottom: 10px;
-    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25), inset 0 -4px 0 rgba(0, 0, 0, 0.20);
-    transition: box-shadow 0.3s ease;
-    font-size: clamp(0.9rem, 2vw, 1rem);
-    &:active {
-      box-shadow: 0 0 4px rgba(0, 0, 0, 0.25), inset 0 0 4px rgba(0, 0, 0, 0.20);
-    }
-  }
-
-  .modal .google-btn img {
-    width: clamp(20px, 4vw, 24px);
-    height: clamp(20px, 4vw, 24px);
-    vertical-align: middle;
-  }
-
-  .close {
-    color: #aaaaaa;
-    font-size: clamp(16px, 3vw, 20px);
-    font-weight: bold;
-  }
-  /* modal close button */
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  @media screen and (min-width: 768px) {
-    .modal-content {
-      width: 80%;
-    }
-  }
-
-  @media screen and (min-width: 1024px) {
-    .modal-content {
-      width: 400px;
-    }
   }
 }
