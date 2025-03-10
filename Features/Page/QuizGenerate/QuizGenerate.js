@@ -13,7 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
             topic: topicInput.value.trim(),
             numberOfQuestions: parseInt(numQuestionsInput.value),
             language: languageSelect.value === 'english' ? 'en' : 
-                     languageSelect.value === 'vietnamese' ? 'vi' : 'km'
+                      languageSelect.value === 'vietnamese' ? 'vi' : 
+                      languageSelect.value === 'chinese' ? 'zh' : 
+                      languageSelect.value === 'japanese' ? 'ja' : 'en'
         };
 
         // Validate input
