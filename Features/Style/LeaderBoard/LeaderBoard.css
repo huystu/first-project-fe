@@ -1,0 +1,198 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #e8f5e9;
+  /* min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; */
+}
+
+.quiz-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px;
+  background-color: #81c784;
+  color: #000000;
+  font-weight: bold;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgb(162, 162, 162);
+}
+
+/* Back Button Styles */
+.back-button {
+  background-color: #ff5252;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 20px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #ff1744;
+}
+
+/* Main Content Styles */
+.main-content {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Leaderboard Container Styles */
+.leaderboard-container {
+  background-color: #e0f7fa;
+  padding: 25px;
+  border-radius: 15px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard-title {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Player List Styles */
+.player-list {
+  list-style: none;
+}
+
+.player-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  margin: 10px 0;
+  border-radius: 25px;
+  color: #000000;
+  transition: transform 0.2s ease;
+}
+
+.player-item:hover {
+  transform: scale(1.02);
+}
+
+.player-rank {
+  width: 30px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.player-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: white;
+  margin: 0 10px;
+}
+
+.player-name {
+  flex-grow: 1;
+  font-weight: bold;
+}
+
+.player-score {
+  margin-left: 15px;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+/* Rank Message Styles */
+.rank-message {
+  text-align: center;
+  margin-top: 20px;
+  color: #333;
+  font-weight: bold;
+}
+
+.rank-1 {
+  background-color: #4caf50;
+}
+.rank-2 {
+  background-color: #2196f3;
+}
+.rank-3 {
+  background-color: #ffd700;
+}
+.rank-4 {
+  background-color: #ff9800;
+}
+.rank-5 {
+  background-color: #f44336;
+}
+
+/* Score Summary Styles */
+.score-summary {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.correct-score {
+  color: #4caf50;
+}
+
+.wrong-score {
+  color: #f44336;
+}
+
+.total-score {
+  color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  .quiz-header {
+    padding: 8px 15px;
+    font-size: 1em;
+  }
+
+  .leaderboard-container {
+    padding: 15px;
+  }
+
+  .player-item {
+    padding: 10px 15px;
+  }
+
+  .score-summary {
+    font-size: 22px;
+    gap: 20px;
+  }
+
+  .leaderboard-title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 400px) {
+  .score-summary {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+}
