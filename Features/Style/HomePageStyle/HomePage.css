@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
 
 body {
@@ -253,6 +253,7 @@ footer {
   text-decoration: underline;
 }
 
+/* Modal */
 .modal {
   display: flex;
   visibility: hidden;
@@ -260,6 +261,8 @@ footer {
   justify-content: center;
   align-items: center;
   z-index: 1;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.4);
@@ -293,8 +296,8 @@ footer {
 .modal .google-btn{
   gap: 10px;
   padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+  border: none;
+  border-radius: 5px;
   background-color: white;
   cursor: pointer;
   width: min(60%, 300px);
@@ -302,6 +305,8 @@ footer {
   box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25), inset 0 -4px 0 rgba(0, 0, 0, 0.20);
   transition: box-shadow 0.3s ease;
   font-size: clamp(0.9rem, 2vw, 1rem);
+  display: flex;
+  align-items: center;
   &:active {
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.25), inset 0 0 4px rgba(0, 0, 0, 0.20);
   }
@@ -441,11 +446,11 @@ footer {
   }
 }
 
-.quiz-image {
+.quiz-card {
   transition: transform 0.2s ease-in-out;
 }
 
-.quiz-image:hover {
+.quiz-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
