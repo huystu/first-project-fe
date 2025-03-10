@@ -1,15 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quizy</title>
     <link rel="stylesheet" href="../../Style/HomePageStyle/HomePage.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Firebase App (the core Firebase SDK) -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <!-- Add Firebase Auth -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <!-- Add other Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="../HomePage/HomePage.js"></script>
   </head>
   <body>
@@ -72,19 +79,23 @@
       </div>
     </footer>
     <div id="myModal" class="modal">
-        <div class="modal-content">
-            <h2>Sign in</h2>
-            <div class="flex-container">
-                <button class="google-btn">
-                    <img src="../../Assets/Icon/google-icon-logo-svgrepo-com.svg" alt="Google" />
-                    Sign in with Google
-                </button>
-                <div>
-                    <span class="close" style="text-decoration: underline;">Cancel</span>
-                </div>
-            </div>
+      <div class="modal-content">
+        <h2>Sign in</h2>
+        <div class="flex-container">
+          <button class="google-btn" id="google-signin">
+            <img
+              src="../../Assets/Icon/google-icon-logo-svgrepo-com.svg"
+              alt="Google"
+            />
+            Sign in with Google
+          </button>
+          <div>
+            <span class="close" style="text-decoration: underline">Cancel</span>
+          </div>
         </div>
+      </div>
     </div>
+    <!-- Load SignInAPI.js after Firebase is loaded -->
     <script src="../../API/SignIn-SignOut/SignInAPI.js"></script>
   </body>
 </html>
