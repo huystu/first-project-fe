@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "http://2.59.135.31:3000/api/quizzes/generate",
         {
           method: "POST",
+
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
