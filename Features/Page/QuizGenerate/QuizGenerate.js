@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Please enter a quiz topic');
             return;
         }
-
+      
         if (quizData.numberOfQuestions < 1 || quizData.numberOfQuestions > 20) {
             alert('Number of questions must be between 1 and 20');
             return;
@@ -48,11 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!result.quizSet || !result.quizSet.id) {
                 throw new Error('Unexpected API response format');
             }
-
+          
             // Remove loading state and show completion state
             container.classList.remove('loading');
             container.classList.add('completed');
-
+          
             // Store the generated quiz ID
             localStorage.setItem('generatedQuizId', result.quizSet.id);
 
@@ -74,4 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (value < 1) numQuestionsInput.value = 1;
         if (value > 20) numQuestionsInput.value = 20;
     });
+
 });
+
