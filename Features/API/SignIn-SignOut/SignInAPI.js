@@ -69,6 +69,11 @@ googleBtn.addEventListener("click", async () => {
     });
 
     if (!response.ok) {
+      Swal.fire({
+        title: "Error",
+        text: "Authentication failed",
+        icon: "error",
+      });
       throw new Error(
         `Authentication failed: ${response.status} ${response.statusText}`
       );
@@ -83,6 +88,11 @@ googleBtn.addEventListener("click", async () => {
     modal.style.visibility = "hidden";
 
     updateUIForLoggedInUser(data.user);
+    Swal.fire({
+      title: "Success",
+      text: "Sign in successful",
+      icon: "success",
+    });
   } catch (error) {
     console.error("Error during sign in:", error);
     alert(`Failed to sign in: ${error.message}`);
@@ -109,7 +119,17 @@ async function signOut() {
       modal.style.visibility = "visible";
     };
     console.log("Sign out successful");
+    Swal.fire({
+      title: "Success",
+      text: "Sign out successful",
+      icon: "success",
+    });
   } catch (error) {
+    Swal.fire({
+      title: "Error",
+      text: "Sign out failed",
+      icon: "error",
+    });
     console.error("Error signing out:", error);
     alert("Failed to sign out. Please try again.");
   }
