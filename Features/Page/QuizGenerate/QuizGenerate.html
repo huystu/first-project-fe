@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Generator</title>
+    <link
+      rel="stylesheet"
+      href="/Features/Style/QuizGenerate/QuizGenerate.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Loading State -->
+      <img class="ai-thinking" id="loading-gif" src="/Features/Style/Image/ai-generate.gif" alt="Loading...">
+      <p class="loading-text">Wait a bit, your quiz is ready in a second...</p>
+      
+      <!-- Completion State -->
+      <div class="completion-state">
+        <img class="done-image" src="/Features/Style/Image/done.gif" alt="Done!">
+        <p class="completion-text">Your quizset has been generated!</p>
+        <div class="button-group">
+          <button class="play-now-btn">Play Now</button>
+          <button class="back-home-btn" onclick="window.location.href='../HomePage/HomPage.html'">Back to Home</button>
+        </div>
+      </div>
+
+      <!-- Initial Form State -->
+      <header>
+        <h1>Quiz Generator</h1>
+        <p>Create your custom quiz below</p>
+      </header>
+
+      <main class="quiz-form">
+        <div class="form-group">
+          <label for="topic">Quiz Topic:</label>
+          <input type="text" id="topic" placeholder="Enter quiz topic" />
+        </div>
+
+        <div class="form-group">
+          <label for="numQuestions">Number of Questions:</label>
+          <input type="number" id="numQuestions" min="1" max="20" value="5" />
+        </div>
+        <div class="form-group">
+            <label for="language">Language:</label>
+            <select id="language">
+                <option value="english">English</option>
+                <option value="vietnamese">Vietnamese</option>
+                <option value="Cambodian">Scambodia</option>
+            </select>
+        </div>
+
+        <button type="submit" id="generateBtn" class="generate-btn">
+          Generate Quiz
+          <img class="quizgen-btn-image"
+            src="/Features/Style/Image/quizgen-btn-image.png"
+            alt="arrow-right"
+          />
+        </button>
+      </main>
+    </div>
+    <script src="QuizGenerate.js"></script>
+    <iframe
+      src="background.html"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        border: none;
+        z-index: -1;
+        pointer-events: none;
+      "
+    ></iframe>
+  </body>
+</html>

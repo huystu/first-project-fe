@@ -12,32 +12,37 @@
   <body>
     <header class="header">
       <div class="logo">
-        <img src="../../Style/HomePageStyle/img/logo.svg" alt="Quizy" />
+        <img src="../../Style/HomePageStyle/ImgHomePage/logo.svg" alt="Quizy" />
       </div>
 
       <div class="join-game">
         <div class="join-game-content">
-          <h1>Join Game?</h1>
-          <input type="text" placeholder="Enter PIN" class="pin-input" />
+          <h1>Join Game? Enter PIN:</h1>
+          <input type="text" placeholder="123 456" class="pin-input" />
         </div>
 
         <button class="search-btn">
-          <img src="../../Style/HomePageStyle/img/search.svg" alt="Search" />
+          <img
+            src="../../Style/HomePageStyle/ImgHomePage/search.svg"
+            alt="Search"
+          />
         </button>
-
-        <button class="signin-btn" id="md-btn">Sign in</button>
       </div>
+      <button class="signin-btn">Sign in</button>
     </header>
 
     <main>
       <section class="hero">
         <div class="play-card">
           <div class="bot-icon">
-            <img src="../../Style/HomePageStyle/img/bot.svg" alt="Bot" />
+            <img
+              src="../../Style/HomePageStyle/ImgHomePage/bot.svg"
+              alt="Bot"
+            />
           </div>
           <div class="play-content">
             <h2>Play now!</h2>
-            <button class="generate-btn">Generate Quiz</button>
+            <button class="generate-btn" onclick="window.location.href='../QuizGenerate/QuizGenerate.html'">Generate Quiz</button>
           </div>
         </div>
       </section>

@@ -1,0 +1,397 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+}
+
+:root {
+  --primary-color: #00c2b8;
+  --secondary-color: #ffde00;
+  --background-color: #a8e6e2;
+  --text-color: #333;
+  --border-radius: 20px;
+  --button-radius: 50px;
+}
+
+html {
+  font-size: 16px; /* Base font size for rem calculations */
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+@keyframes moveBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+.container {
+  background-color: var(--background-color);
+  padding: clamp(1rem, 5vw, 2rem); /* Responsive padding */
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 500px;
+  opacity: 0.94;
+  transition: all 0.3s ease;
+  margin: 0 auto;
+}
+
+.container.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.75rem, 3vw, 1.25rem);
+}
+
+.container.loading .quiz-form,
+.container.loading header {
+  display: none;
+}
+
+.ai-thinking {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  aspect-ratio: 300 / 160; /* Maintain aspect ratio */
+  display: none;
+}
+
+.container.loading .ai-thinking {
+  display: block;
+}
+
+.loading-text {
+  font-size: clamp(1.5rem, 5vw, 2.5rem); /* Responsive font size */
+  color: var(--text-color);
+  text-align: center;
+  display: none;
+}
+
+.container.loading .loading-text {
+  display: block;
+}
+
+header {
+  margin-bottom: 0.5rem;
+}
+
+header h1 {
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.quiz-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label {
+  color: #000;
+  font-size: clamp(1.25rem, 4vw, 2rem); /* Responsive font size */
+  font-weight: 500;
+}
+
+input,
+select {
+  padding: clamp(0.5rem, 3vw, 0.75rem);
+  border: 2px solid var(--primary-color);
+  border-radius: var(--button-radius);
+  font-size: clamp(0.875rem, 3vw, 1.2rem);
+  transition: border-color 0.3s ease;
+  background-color: white;
+  color: #777;
+  width: 100%;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.generate-btn {
+  background-color: var(--secondary-color);
+  color: black;
+  padding: clamp(0.75rem, 2vw, 1.5rem); /* Increased padding range */
+  border: none;
+  border-radius: var(--button-radius);
+  font-size: clamp(1.25rem, 3vw, 2rem); /* Increased font size range */
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Changed to all for smoother transitions */
+  margin-top: clamp(1rem, 3vw, 2rem); /* Responsive margin */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1rem); /* Responsive gap */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  font-family: "Nunito", sans-serif;
+  width: 100%;
+  min-height: clamp(3rem, 8vw, 5rem); /* Ensure minimum height scales with viewport */
+}
+
+.generate-btn:hover {
+  background-color: #f5d500;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Icons for the generate button */
+.generate-btn::after {
+  content: "";
+  position: absolute;
+  right: clamp(1rem, 5vw, 1.875rem);
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+/* Dropdown styling */
+select {
+  appearance: none;
+  background-position: right 1rem center;
+  background-size: 1.5rem;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+select:not(:focus) {
+  margin-bottom: 0;
+}
+
+.quizgen-btn-image {
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: clamp(60px, 20%, 100px);
+  max-width: clamp(70px, 25%, 110px);
+}
+
+.completion-state {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.75rem, 3vw, 1.25rem);
+  text-align: center;
+  width: 100%;
+}
+
+.container.completed .completion-state {
+  display: flex;
+}
+
+.container.completed .quiz-form,
+.container.completed header,
+.container.completed .loading-text,
+.container.completed .ai-thinking {
+  display: none;
+}
+
+.done-image {
+  width: clamp(120px, 40vw, 200px);
+  height: auto;
+  margin-bottom: clamp(0.75rem, 3vw, 1.25rem);
+}
+
+.completion-text {
+  font-size: clamp(1.25rem, 4vw, 2rem);
+  color: var(--text-color);
+  font-weight: bold;
+  margin: clamp(0.75rem, 3vw, 1.25rem) 0;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: clamp(0.5rem, 3vw, 1.25rem);
+  margin-top: clamp(0.75rem, 3vw, 1.25rem);
+  justify-content: center;
+  width: 100%;
+}
+
+.play-now-btn,
+.back-home-btn {
+  padding: clamp(0.5rem, 2vw, 0.75rem) clamp(0.75rem, 3vw, 1.5rem);
+  border: none;
+  border-radius: var(--button-radius);
+  font-size: clamp(0.975rem, 3vw, 1.25rem);
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Nunito", sans-serif;
+  flex: 1;
+  min-width: 150px;
+  max-width: 230px;
+}
+
+.play-now-btn {
+  background-color: var(--secondary-color);
+  color: black;
+}
+
+.back-home-btn {
+  background-color: var(--primary-color);
+  color: black;
+}
+
+.play-now-btn:hover {
+  background-color: #f5d500;
+  transform: scale(1.05);
+}
+
+.back-home-btn:hover {
+  background-color: #00a89f;
+  transform: scale(1.05);
+}
+
+/* Media Queries for different screen sizes */
+
+/* Small mobile devices */
+@media (max-width: 320px) {
+  html {
+    font-size: 14px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .play-now-btn,
+  .back-home-btn {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Mobile devices */
+@media (min-width: 321px) and (max-width: 480px) {
+  html {
+    font-size: 15px;
+  }
+
+  .container {
+    padding: 1.5rem;
+  }
+  .generate-btn {
+    min-height: 3.5rem; /* Ensure it's not too small on mobile */
+  }
+}
+
+/* Larger mobile and small tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+
+  .container {
+    max-width: 600px;
+  }
+}
+
+/* Tablets and small laptops */
+@media (min-width: 769px) and (max-width: 1024px) {
+  html {
+    font-size: 17px;
+  }
+
+  .container {
+    max-width: 700px;
+  }
+}
+
+/* Desktops and large screens */
+@media (min-width: 1025px) {
+  html {
+    font-size: 18px;
+  }
+
+  .container {
+    max-width: 800px;
+  }
+
+  .container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+  .generate-btn {
+    font-size: 1.75rem;
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+}
+
+@media (min-width: 1440px) {
+  header h1 {
+    font-size: 4rem;
+  }
+  
+  header p {
+    font-size: 1.75rem;
+  }
+  
+  label {
+    font-size: 2.75rem;
+  }
+  
+  input,
+  select {
+    font-size: 1.5rem;
+    padding: 1.25rem;
+  }
+
+  .generate-btn {
+    font-size: 2rem;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    min-height: 5rem;
+  }
+}
+
+/* For landscape orientation on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  body {
+    padding: 0.5rem;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+
+  .button-group {
+    flex-direction: row;
+  }
+}
+
+/* For high-density (retina) displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .container {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+  }
+}
+
