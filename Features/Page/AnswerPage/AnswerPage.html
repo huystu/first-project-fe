@@ -7,37 +7,32 @@
     <title>Quiz Interface</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
     <link rel="stylesheet" href="../../Style/AnswerPage/AnswerPage.css">
+    <script defer src="Play.js"></script>
 </head>
 
 <body>
     <div class="header">
-        <div class="quiz-title">Quiz topic</div>
-        <div class="question-number">Question: 1/10</div>
+        <div class="quiz-title" id="quizTitle">Quiz topic</div>
+        <div class="question-number" id="questionNumber">Question: 1/10</div>
     </div>
 
     <div class="container">
         <div class="TimeAndQuestion">
-            <!-- Hàng chứa timer -->
             <div class="timer-container">
-                <div class="timer">10</div>
+                <div class="timer" id="timer">10</div>
             </div>
-
-            <!-- Hàng chứa câu hỏi -->
             <div class="question-container">
-                <div class="question">Question 1:<br>Lorem ipsum?</div>
+                <div class="question" id="questionText">Loading question...</div>
             </div>
         </div>
         <div class="options">
-            <!-- Nhóm A & C bên trái -->
             <div class="option-column left-options">
-                <button class="option red option-a">A: Lorem ipsum </button>
-                <button class="option blue option-c">C: Lorem ipsum</button>
+                <button class="option red" id="optionA" data-choice="A">A:</button>
+                <button class="option blue" id="optionC" data-choice="C">C:</button>
             </div>
-
-            <!-- Nhóm B & D bên phải -->
             <div class="option-column right-options">
-                <button class="option yellow option-b">B: Lorem ipsum</button>
-                <button class="option green option-d">D: Lorem ipsum</button>
+                <button class="option yellow" id="optionB" data-choice="B">B:</button>
+                <button class="option green" id="optionD" data-choice="D">D:</button>
             </div>
         </div>
     </div>
