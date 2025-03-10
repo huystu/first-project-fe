@@ -30,11 +30,16 @@ document.addEventListener("DOMContentLoaded", () => {
       "Generating your quiz... 🚀";
 
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(
         "http://2.59.135.31:3000/api/quizzes/generate",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
           body: JSON.stringify(quizData),
         }
       );
@@ -54,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       playNowBtn.style.display = "block";
       playNowBtn.onclick = () => {
-        window.location.href = `/Features/Page/AnswerPage/AnswerPage.html?id=${result.quizSet.id}`;
+        window.location.href = `/Page/AnswerPage/AnswerPage.html?id=${result.quizSet.id}`;
       };
     } catch (error) {
       console.error("Error generating quiz:", error);
