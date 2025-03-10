@@ -332,22 +332,8 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(timerInterval);
     await endSession();
 
-    // Show final score with SweetAlert2
-    Swal.fire({
-      title: "Quiz Completed! 🎉",
-      html: `
-        <h3>Final Score: ${score}</h3>
-        <p>Quiz: ${currentQuiz.title}</p>
-        <p>Questions Answered: ${currentQuiz.questions.length}</p>
-      `,
-      icon: "success",
-      confirmButtonText: "Return to Home",
-      allowOutsideClick: false,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        window.location.href = "../HomePage/HomPage.html";
-      }
-    });
+    // Redirect to leaderboard
+    window.location.href = `../LeaderBoard/LeaderBoard.html?id=${currentQuiz._id}&sessionId=${currentSession._id}`;
   }
 
   // Show error message
