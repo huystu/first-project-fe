@@ -458,15 +458,6 @@ footer {
   }
 }
 
-.quiz-card {
-  transition: transform 0.2s ease-in-out;
-}
-
-.quiz-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
