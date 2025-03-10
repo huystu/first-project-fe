@@ -7,10 +7,6 @@
 
 body {
   background-color: #e8f5e9;
-  /* min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center; */
 }
 
 .quiz-header {
@@ -18,7 +14,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 20px;
+  padding: 20px 50px;
   background-color: #81c784;
   color: #000000;
   font-weight: bold;
@@ -27,6 +23,11 @@ body {
 }
 
 /* Back Button Styles */
+.navigation {
+  width: 100%;
+  padding: 20px 0;
+}
+
 .back-button {
   background-color: #ff5252;
   color: white;
@@ -44,27 +45,32 @@ body {
 }
 
 /* Main Content Styles */
-.main-content {
+main {
   width: 100%;
-  max-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 30px;
 }
 
-/* Leaderboard Container Styles */
+/* Leaderboard Section Styles */
+.leaderboard-section {
+  width: 100%;
+  max-width: 800px;
+}
+
 .leaderboard-container {
   background-color: #e0f7fa;
-  padding: 25px;
-  border-radius: 15px;
+  padding: 30px;
+  border-radius: 20px;
   width: 100%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .leaderboard-title {
   text-align: center;
-  margin-bottom: 25px;
-  font-size: 28px;
+  margin-bottom: 30px;
+  font-size: 60px;
   font-weight: bold;
   color: #333;
 }
@@ -72,127 +78,220 @@ body {
 /* Player List Styles */
 .player-list {
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .player-item {
   display: flex;
   align-items: center;
-  padding: 12px 20px;
-  margin: 10px 0;
+  padding: 15px 25px;
   border-radius: 25px;
-  color: #000000;
-  transition: transform 0.2s ease;
+  color: white;
+  transition: all 0.3s ease;
 }
 
 .player-item:hover {
   transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .player-rank {
-  width: 30px;
+  width: 40px;
   text-align: center;
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.3em;
 }
 
 .player-avatar {
-  width: 35px;
-  height: 35px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
-  background-color: white;
-  margin: 0 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  margin: 0 15px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .player-name {
   flex-grow: 1;
+  font-size: 1.1em;
   font-weight: bold;
+  letter-spacing: 0.5px;
 }
 
 .player-score {
-  margin-left: 15px;
+  margin-left: 20px;
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.3em;
+  padding: 5px 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+/* Rank Colors */
+.rank-1 {
+  background-color: #4caf50;
+  border: 2px solid #45a049;
+}
+
+.rank-2 {
+  background-color: #2196f3;
+  border: 2px solid #1e88e5;
+}
+
+.rank-3 {
+  background-color: #ffd700;
+  border: 2px solid #ffc107;
+}
+
+.rank-4 {
+  background-color: #ff9800;
+  border: 2px solid #f57c00;
+}
+
+.rank-5 {
+  background-color: #f44336;
+  border: 2px solid #e53935;
 }
 
 /* Rank Message Styles */
 .rank-message {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 25px;
   color: #333;
   font-weight: bold;
+  font-size: 1.2em;
+  padding: 15px;
 }
 
-.rank-1 {
-  background-color: #4caf50;
-}
-.rank-2 {
-  background-color: #2196f3;
-}
-.rank-3 {
-  background-color: #ffd700;
-}
-.rank-4 {
-  background-color: #ff9800;
-}
-.rank-5 {
-  background-color: #f44336;
+/* Score Section Styles */
+.score-section {
+  width: 100%;
+  max-width: 800px;
 }
 
-/* Score Summary Styles */
 .score-summary {
   display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 30px;
-  font-size: 26px;
+  justify-content: space-around;
+  gap: 40px;
+  padding: 20px;
+}
+
+.correct-score,
+.wrong-score,
+.total-score {
+  font-size: 28px;
   font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: transform 0.2s ease;
 }
 
 .correct-score {
-  color: #4caf50;
+  color: white;
+  background-color: #4caf50;
 }
 
 .wrong-score {
-  color: #f44336;
+  color: white;
+  background-color: #f44336;
 }
 
 .total-score {
-  color: #333;
+  color: white;
+  background-color: #333;
+}
+
+.correct-score:hover,
+.wrong-score:hover,
+.total-score:hover {
+  transform: scale(1.05);
 }
 
 /* Responsive Design */
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   body {
-    padding: 10px;
+    padding: 15px;
   }
 
   .quiz-header {
-    padding: 8px 15px;
-    font-size: 1em;
+    padding: 15px;
+    font-size: 0.9em;
   }
 
   .leaderboard-container {
+    padding: 20px;
+  }
+
+  .leaderboard-title {
+    font-size: 28px;
+  }
+
+  .player-item {
+    padding: 12px 20px;
+  }
+
+  .player-avatar {
+    width: 35px;
+    height: 35px;
+  }
+
+  .score-summary {
+    gap: 20px;
     padding: 15px;
+  }
+
+  .correct-score,
+  .wrong-score,
+  .total-score {
+    font-size: 24px;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 500px) {
+  .quiz-header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
   }
 
   .player-item {
     padding: 10px 15px;
   }
 
-  .score-summary {
-    font-size: 22px;
-    gap: 20px;
+  .player-rank {
+    width: 30px;
+    font-size: 1.1em;
   }
 
-  .leaderboard-title {
-    font-size: 24px;
+  .player-avatar {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
   }
-}
 
-@media (max-width: 400px) {
+  .player-name {
+    font-size: 1em;
+  }
+
+  .player-score {
+    font-size: 1.1em;
+    margin-left: 10px;
+  }
+
   .score-summary {
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
+  }
+
+  .correct-score,
+  .wrong-score,
+  .total-score {
+    width: 100%;
+    text-align: center;
   }
 }
