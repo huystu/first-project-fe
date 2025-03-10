@@ -96,6 +96,24 @@ function updateUIForLoggedInUser(user) {
   signInBtn.onclick = signOut;
 }
 
+async function signOut() {
+  try {
+    console.log("Signing out...");
+    await firebase.auth().signOut();
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    const signInBtn = document.getElementById("md-btn");
+    signInBtn.textContent = "Sign in";
+    signInBtn.onclick = function () {
+      modal.style.visibility = "visible";
+    };
+    console.log("Sign out successful");
+  } catch (error) {
+    console.error("Error signing out:", error);
+    alert("Failed to sign out. Please try again.");
+  }
+}
 window.addEventListener("DOMContentLoaded", () => {
   console.log("Checking for existing user session...");
   const user = JSON.parse(localStorage.getItem("user"));
