@@ -1,14 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     const generateBtn = document.getElementById('generateBtn');
+    const playNowBtn = document.getElementById('playNowBtn'); // New Play Now button
     const topicInput = document.getElementById('topic');
     const numQuestionsInput = document.getElementById('numQuestions');
-    const container = document.querySelector('.container');
     const languageSelect = document.getElementById('language');
-
+    const container = document.querySelector('.container');
+    
     generateBtn.addEventListener('click', async (e) => {
-        e.preventDefault(); // Prevent form submission
+        e.preventDefault(); // Prevent default form submission
 
-        // Get form values
+        // Get user input values
         const quizData = {
             topic: topicInput.value.trim(),
             numberOfQuestions: parseInt(numQuestionsInput.value),
@@ -18,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
                       languageSelect.value === 'japanese' ? 'ja' : 'en'
         };
 
-        // Validate input
+        // Input validation
         if (!quizData.topic) {
             alert('Please enter a quiz topic');
             return;
@@ -29,48 +30,37 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         
-        // Remove any existing states
-        container.classList.remove('completed');
-        
         // Show loading state
         container.classList.add('loading');
+        document.querySelector('.loading-text').textContent = "AI is generating your quiz... 🚀";
 
         try {
-            console.log(quizData);
-            // Make API call to generate quiz
+            // Make API call to generate the quiz
             const response = await fetch('http://2.59.135.31:3000/api/quizzes/generate', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(quizData)
             });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             const result = await response.json();
 
-            // Check if the response matches the expected format
-            if (!result.message || !result.quizSet || !result.quizSet.id || !result.quizSet.questions) {
+            if (!result.quizSet || !result.quizSet.id) {
                 throw new Error('Unexpected API response format');
             }
 
-            // Remove loading state
+            // Remove loading state and show completion state
             container.classList.remove('loading');
-            
-            // Show completion state
             container.classList.add('completed');
-            
-            console.log('Quiz generated successfully:', result);
-            console.log('Quiz Title:', result.quizSet.title);
-            console.log('Quiz Description:', result.quizSet.description);
-            console.log('Question IDs:', result.quizSet.questions);
-            
-            // Store the quiz data in localStorage (optional, can be removed if not needed)
-            localStorage.setItem('generatedQuiz', JSON.stringify(result.quizSet));
 
+            // Store the generated quiz ID
+            localStorage.setItem('generatedQuizId', result.quizSet.id);
+
+            // Show and enable Play Now button
+            playNowBtn.style.display = 'block';
+            playNowBtn.onclick = () => {
+                window.location.href = `Features/Page/AwnserPage/AwnserPage.html?id=${result.quizSet.id}`;
+            };
         } catch (error) {
             console.error('Error generating quiz:', error);
             alert('Failed to generate quiz. Please try again.');
@@ -78,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Add input validation
+    // Number input validation
     numQuestionsInput.addEventListener('input', () => {
         const value = parseInt(numQuestionsInput.value);
         if (value < 1) numQuestionsInput.value = 1;
