@@ -16,6 +16,7 @@ body {
   padding: 1rem 2rem;
   background-color: #ffffff;
   border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 4px 6px rgb(162, 162, 162);
 }
 
 .logo img {
@@ -115,8 +116,8 @@ body {
   background-color: #f08800;
 }
 
-/* Hero Section */
-.hero {
+/* generate-quiz Section */
+.generate-quiz {
   padding: 2rem;
   display: flex;
   justify-content: center;
@@ -225,6 +226,15 @@ body {
   color: #666666;
   font-size: 0.9rem;
   margin-top: 0.5rem;
+}
+
+.quiz-card {
+  transition: transform 0.2s ease-in-out;
+}
+
+.quiz-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 1);
 }
 
 /* Footer */
@@ -391,7 +401,7 @@ footer {
     width: 100%;
   }
 
-  .hero {
+  .generate-quiz {
     padding: 1rem;
   }
 
@@ -453,7 +463,6 @@ footer {
 }
 
 .quiz-card:hover {
-
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
@@ -536,12 +545,12 @@ footer {
     margin-top: 1rem;
   }
 
-  .hero {
+  .generate-quiz {
     padding: 3rem;
   }
 
   .play-card {
-    padding: 3rem;
+    padding: 1rem;
     max-width: 600px;
     gap: 2rem;
     border-radius: 20px;
@@ -636,12 +645,12 @@ footer {
     gap: 1rem;
   }
 
-  .hero {
+  .generate-quiz {
     padding: 4rem;
   }
 
   .play-card {
-    padding: 4rem;
+    padding: 1rem;
     max-width: 700px;
     gap: 3rem;
     border-radius: 25px;
@@ -741,12 +750,12 @@ footer {
     gap: 1.2rem;
   }
 
-  .hero {
+  .generate-quiz {
     padding: 5rem;
   }
 
   .play-card {
-    padding: 5rem;
+    padding: 1rem;
     max-width: 800px;
     gap: 4rem;
     border-radius: 30px;
@@ -849,12 +858,12 @@ footer {
     gap: 1.4rem;
   }
 
-  .hero {
+  .generate-quiz {
     padding: 6rem;
   }
 
   .play-card {
-    padding: 6rem;
+    padding: 1rem;
     max-width: 900px;
     gap: 4.5rem;
     border-radius: 35px;
