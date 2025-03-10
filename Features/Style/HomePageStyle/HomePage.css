@@ -363,11 +363,13 @@ footer {
 
   .pin-input {
     width: 150px;
+
   }
 
   .quiz-section {
     padding: 2rem;
   }
+
 }
 
 @media screen and (max-width: 768px) {
@@ -451,6 +453,7 @@ footer {
 }
 
 .quiz-card:hover {
+
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
@@ -889,3 +892,4 @@ footer {
     gap: 1.4rem;
   }
 }
+
