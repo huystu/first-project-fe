@@ -5,13 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leaderboard</title>
+  <link rel="stylesheet" href="../../Style/HomePageStyle/HomePage.css">
   <link rel="stylesheet" href="../../Style/LeaderBoard/LeaderBoard.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 </head>
 
 <body>
 
-  <!-- Header riêng biệt cho LeaderBoard -->
-  <header class="header leaderboard-header">
+  <!-- Header giống với HomePage -->
+  <header class="header">
     <div class="logo">
       <img src="../../Assets/Img/ImgHomePage/logo.svg" alt="Quizy">
     </div>
@@ -25,11 +27,17 @@
       </button>
     </div>
     <button class="signin-btn" id="signin-btn">Sign in</button>
-    <button class="signout-btn" id="signout-btn" style="display: none;">Sign out</button>
-
   </header>
 
-  <div class="container">
+  <main class="container">
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+      <video class="loading-video" autoplay loop muted playsinline>
+        <source src="../../Assets/Img/QuizgenImage/Leaderboard_loading.webm" type="video/webm">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
     <!-- Quiz Info -->
     <div class="quiz-info">
       <h1 id="quizTitle">Quiz Title</h1>
@@ -37,7 +45,7 @@
     </div>
 
     <!-- Top Players Section -->
-    <div class="leaderboard-section">
+    <section class="leaderboard-section">
       <h2>Top Players 🏆</h2>
       <div class="leaderboard-table">
         <table>
@@ -51,18 +59,18 @@
             </tr>
           </thead>
           <tbody id="leaderboardBody">
-            <!-- Will be populated by JavaScript -->
+            <!-- Data will be inserted dynamically via JavaScript -->
           </tbody>
         </table>
       </div>
-    </div>
+    </section>
 
     <!-- Your Results Section -->
-    <div class="results-section">
-      <h2>Your Results </h2>
+    <section class="results-section">
+      <h2>Your Results</h2>
       <div class="results-summary">
         <div class="summary-item1">
-          <span class="label">Final Score 🏆 </span>
+          <span class="label">Final Score 🏆</span>
           <span class="value" id="finalScore">0</span>
         </div>
         <div class="summary-item2">
@@ -79,16 +87,16 @@
       <div class="detailed-results">
         <h3>Question Details</h3>
         <div class="questions-container" id="questionsContainer">
-          <!-- Will be populated by JavaScript -->
+          <!-- Data will be dynamically inserted -->
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Action Buttons -->
     <div class="action-buttons">
       <button class="btn play-again" onclick="playAgain()">Play Again</button>
     </div>
-  </div>
+  </main>
 
   <script src="LeaderBoard.js"></script>
 </body>
