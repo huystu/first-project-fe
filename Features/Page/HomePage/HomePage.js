@@ -1,3 +1,15 @@
+// Function to determine cards per page based on screen width
+function getCardsPerPage() {
+  const width = window.innerWidth;
+  if (width >= 1200) {
+    return 3; // Medium and larger screens
+  } else if (width >= 768) {
+    return 2; // Small screens
+  } else {
+    return 1; // Extra small screens
+  }
+}
+
 // Function to fetch and display quizzes
 async function displayQuizzes() {
   try {
@@ -65,43 +77,113 @@ async function displayQuizzes() {
 
     // Initialize carousel functionality
     let currentPage = 0;
-    const cardsPerPage = 5;
+    let cardsPerPage = getCardsPerPage();
     const totalPages = Math.ceil(quizSets.length / cardsPerPage);
     const cards = Array.from(cardsContainer.querySelectorAll(".quiz-card"));
 
-    function updateCarousel() {
+    function updateCardPositions(cards, cardsPerPage, currentPage) {
+      const containerWidth = document.querySelector('.cards-container').offsetWidth;
+      const cardWidth = containerWidth / cardsPerPage;
+      
       cards.forEach((card, index) => {
-        if (
-          index >= currentPage * cardsPerPage &&
-          index < (currentPage + 1) * cardsPerPage
-        ) {
-          card.style.display = "block";
+        const pageIndex = Math.floor(index / cardsPerPage);
+        const positionInPage = index % cardsPerPage;
+        
+        if (pageIndex === currentPage) {
+          card.style.display = 'block';
+          card.style.opacity = '1';
+          card.style.transform = 'translateX(0)';
+          card.style.left = `${positionInPage * (100 / cardsPerPage)}%`;
         } else {
-          card.style.display = "none";
+          card.style.display = 'none';
+          card.style.opacity = '0';
         }
       });
+    }
+
+    function updateCarousel() {
+      const slideDirection = this?.classList?.contains('next-btn') ? 'left' : 'right';
+      const startIndex = currentPage * cardsPerPage;
+      const endIndex = startIndex + cardsPerPage;
+      const nextStartIndex = slideDirection === 'left' ? startIndex + cardsPerPage : startIndex - cardsPerPage;
+      const nextEndIndex = nextStartIndex + cardsPerPage;
+
+      // Show and animate current cards sliding out
+      cards.slice(startIndex, endIndex).forEach((card, i) => {
+        card.style.display = "block";
+        card.style.left = `${i * (100 / cardsPerPage)}%`;
+        card.classList.remove('sliding-out-left', 'sliding-out-right', 'sliding-in-left', 'sliding-in-right');
+        card.classList.add(`sliding-out-${slideDirection}`);
+      });
+
+      // Show and animate next cards sliding in
+      cards.slice(nextStartIndex, nextEndIndex).forEach((card, i) => {
+        card.style.display = "block";
+        card.style.left = `${i * (100 / cardsPerPage)}%`;
+        card.classList.remove('sliding-out-left', 'sliding-out-right', 'sliding-in-left', 'sliding-in-right');
+        card.classList.add(`sliding-in-${slideDirection}`);
+      });
+
+      // After animation completes, clean up
+      setTimeout(() => {
+        updateCardPositions(cards, cardsPerPage, currentPage);
+      }, 300);
     }
 
     // Add click handlers for buttons
     const prevBtn = quizGrid.querySelector(".prev-btn");
     const nextBtn = quizGrid.querySelector(".next-btn");
 
-    prevBtn.addEventListener("click", () => {
+    prevBtn.addEventListener("click", function() {
       if (currentPage > 0) {
+        updateCarousel.call(this);
         currentPage--;
-        updateCarousel();
       }
     });
 
-    nextBtn.addEventListener("click", () => {
+    nextBtn.addEventListener("click", function() {
       if (currentPage < totalPages - 1) {
+        updateCarousel.call(this);
         currentPage++;
-        updateCarousel();
       }
     });
 
-    // Initial update
-    updateCarousel();
+    // Initial update without animation
+    cards.forEach((card, index) => {
+      const pageIndex = Math.floor(index / cardsPerPage);
+      const positionInPage = index % cardsPerPage;
+      
+      if (pageIndex === 0) {
+        card.style.display = 'block';
+        card.style.opacity = '1';
+        card.style.transform = 'translateX(0)';
+        card.style.left = `${positionInPage * (100 / cardsPerPage)}%`;
+      } else {
+        card.style.display = 'none';
+        card.style.opacity = '0';
+      }
+    });
+
+    // Update cards per page on window resize
+    window.addEventListener('resize', () => {
+      const newCardsPerPage = getCardsPerPage();
+      if (newCardsPerPage !== cardsPerPage) {
+        cardsPerPage = newCardsPerPage;
+        currentPage = 0; // Reset to first page
+        
+        // Remove all animation classes
+        cards.forEach(card => {
+          card.classList.remove('sliding-out-left', 'sliding-out-right', 'sliding-in-left', 'sliding-in-right');
+        });
+        
+        // Update card positions without animation
+        updateCardPositions(cards, cardsPerPage, currentPage);
+        
+        // Update total pages
+        totalPages = Math.ceil(cards.length / cardsPerPage);
+      }
+    });
+
   } catch (error) {
     console.error("Error fetching quizzes:", error);
   }
@@ -181,43 +263,78 @@ async function displayPopularQuizzes() {
 
     // Initialize carousel functionality
     let currentPage = 0;
-    const cardsPerPage = 5;
+    let cardsPerPage = getCardsPerPage();
     const totalPages = Math.ceil(sortedQuizSets.length / cardsPerPage);
     const cards = Array.from(cardsContainer.querySelectorAll(".quiz-card"));
 
     function updateCarousel() {
-      cards.forEach((card, index) => {
-        if (
-          index >= currentPage * cardsPerPage &&
-          index < (currentPage + 1) * cardsPerPage
-        ) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
-        }
+      const slideDirection = this?.classList?.contains('next-btn') ? 'left' : 'right';
+      const startIndex = currentPage * cardsPerPage;
+      const endIndex = startIndex + cardsPerPage;
+      const nextStartIndex = slideDirection === 'left' ? endIndex : startIndex - cardsPerPage;
+      const nextEndIndex = slideDirection === 'left' ? endIndex + cardsPerPage : startIndex;
+
+      // First make all cards invisible except current and next set
+      cards.forEach(card => {
+        card.style.display = "none";
       });
+
+      // Show and animate current cards sliding out
+      cards.slice(startIndex, endIndex).forEach(card => {
+        card.style.display = "block";
+        card.classList.remove('sliding-out-left', 'sliding-out-right', 'sliding-in-left', 'sliding-in-right');
+        card.classList.add(`sliding-out-${slideDirection}`);
+      });
+
+      // Show and animate next cards sliding in
+      cards.slice(nextStartIndex, nextEndIndex).forEach(card => {
+        card.style.display = "block";
+        card.classList.remove('sliding-out-left', 'sliding-out-right', 'sliding-in-left', 'sliding-in-right');
+        card.classList.add(`sliding-in-${slideDirection}`);
+      });
+
+      // After animation completes, clean up
+      setTimeout(() => {
+        cards.forEach((card, index) => {
+          // Hide all cards first
+          card.style.display = "none";
+          // Remove animation classes
+          card.classList.remove('sliding-out-left', 'sliding-out-right', 'sliding-in-left', 'sliding-in-right');
+          // Show only the cards that should be visible after animation
+          if (index >= nextStartIndex && index < nextEndIndex) {
+            card.style.display = "block";
+          }
+        });
+      }, 300); // Match this with your CSS animation duration
     }
 
     // Add click handlers for buttons
     const prevBtn = popularQuizGrid.querySelector(".prev-btn");
     const nextBtn = popularQuizGrid.querySelector(".next-btn");
 
-    prevBtn.addEventListener("click", () => {
+    prevBtn.addEventListener("click", function() {
       if (currentPage > 0) {
+        updateCarousel.call(this);
         currentPage--;
-        updateCarousel();
       }
     });
 
-    nextBtn.addEventListener("click", () => {
+    nextBtn.addEventListener("click", function() {
       if (currentPage < totalPages - 1) {
+        updateCarousel.call(this);
         currentPage++;
-        updateCarousel();
       }
     });
 
-    // Initial update
-    updateCarousel();
+    // Initial update without animation
+    cards.forEach((card, index) => {
+      card.style.setProperty('--card-index', index % cardsPerPage);
+      if (index < cardsPerPage) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
   } catch (error) {
     console.error("Error fetching popular quizzes:", error);
   }
@@ -227,6 +344,34 @@ async function displayPopularQuizzes() {
 document.addEventListener("DOMContentLoaded", () => {
   displayQuizzes();
   displayPopularQuizzes();
+
+  // Add click handler for generate button
+  const generateBtn = document.querySelector('.generate-btn');
+  if (generateBtn) {
+    generateBtn.addEventListener('click', (e) => {
+      if (!isUserLoggedIn()) {
+        e.preventDefault(); // Prevent default navigation
+        showSignInModal();
+      } else {
+        // If logged in, allow default navigation to QuizGenerate.html
+        window.location.href = '../QuizGenerate/QuizGenerate.html';
+      }
+    });
+  }
+
+  // Check for auth message
+  const authMessage = sessionStorage.getItem('authMessage');
+  if (authMessage) {
+    // Show the message
+    Swal.fire({
+      icon: 'warning',
+      title: 'Authentication Required',
+      text: authMessage,
+      confirmButtonText: 'OK'
+    });
+    // Clear the message
+    sessionStorage.removeItem('authMessage');
+  }
 });
 
 // Add these new functions at the end of the file
@@ -391,3 +536,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+// Add this function near the top of the file, after the getCardsPerPage function
+function showSignInModal() {
+  const modal = document.getElementById("myModal");
+  if (modal) {
+    modal.style.visibility = "visible";
+  }
+}
+
+// Add this function to check if user is logged in
+function isUserLoggedIn() {
+  return localStorage.getItem("user") !== null;
+}

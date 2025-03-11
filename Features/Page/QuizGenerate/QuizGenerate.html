@@ -19,6 +19,23 @@
           connect-src 'self' http://2.59.135.31:3000;
           style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;"
     />
+    <!-- Add the auth check script -->
+    <script src="../../API/Auth/AuthCheck.js"></script>
+    <script>
+      // Check authentication when the page loads
+      document.addEventListener('DOMContentLoaded', () => {
+        if (!checkAuth()) {
+          // If checkAuth returns false, it means the user was redirected
+          // We can also show a message using SweetAlert
+          Swal.fire({
+            icon: 'error',
+            title: 'Access Denied',
+            text: 'Please sign in to generate quizzes',
+            confirmButtonText: 'OK'
+          });
+        }
+      });
+    </script>
   </head>
 
   <body>

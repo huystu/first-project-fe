@@ -16,11 +16,26 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <!-- Add other Firebase products that you want to use -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <!-- Add the auth check script -->
+    <script src="../../API/Auth/AuthCheck.js"></script>
+    <script>
+        // Check authentication when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!checkAuth()) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Access Denied',
+                    text: 'Please sign in to play quizzes',
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
+    </script>
   </head>
   <body>
     <header>
       <div class="logo">
-        <img src="../../Assets/Img/ImgHomePage/logo.svg" id="backHomeBtn" alt="Quizy" />
+        <a href="#"><img src="../../Assets/Img/ImgHomePage/logo.svg" id="backHomeBtn" alt="Quizy" /></a>
       </div>
       <div class="join-game">
         <div class="join-game-content">
