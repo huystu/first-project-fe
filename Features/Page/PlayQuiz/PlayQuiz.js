@@ -17,13 +17,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const statusMessage = document.getElementById("statusMessage");
   const optionButtons = document.querySelectorAll(".option-btn");
   const backHomeBtn = document.getElementById("backHomeBtn");
+  const loadingOverlay = document.getElementById("loadingOverlay");
+
+  // Show loading overlay and disable interactions
+  function showLoading() {
+    loadingOverlay.classList.add("active");
+    document.querySelector(".quiz-container").classList.add("loading-active"); // Target container instead
+  }
+  
+  function hideLoading() {
+    loadingOverlay.classList.remove("active");
+    document.querySelector(".quiz-container").classList.remove("loading-active");
+  }
 
   // Initialize quiz
   async function initializeQuiz() {
+    showLoading(); // Show overlay and disable interactions immediately
+
     const urlParams = new URLSearchParams(window.location.search);
     const quizId = urlParams.get("id");
 
     if (!quizId) {
+      hideLoading();
       showError("No quiz ID provided");
       return;
     }
@@ -52,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (currentSession && currentSession.status === "in-progress") {
           // Ask user if they want to continue
+          hideLoading(); // Hide before Swal to allow interaction with dialog
           const result = await Swal.fire({
             title: "Continue Previous Session?",
             text: `You have an unfinished session (Question ${
@@ -81,8 +97,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       quizTitle.textContent = currentQuiz.title;
+      hideLoading(); // Hide overlay and enable interactions only when fully loaded
       startQuiz();
     } catch (error) {
+      hideLoading();
       showError("Failed to load quiz");
       console.error(error);
     }

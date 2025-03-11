@@ -13,14 +13,20 @@
   </head>
   <body>
     <div class="quiz-container">
+      <!-- Loading Overlay -->
+      <div class="loading-overlay" id="loadingOverlay">
+        <video class="loading-video" autoplay loop muted playsinline>
+          <source src="../../Assets/Img/QuizgenImage/Quizwaittest.webm" type="video/webm" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
       <!-- Header -->
       <div class="header">
         <div class="quiz-info">
           <h1 class="quiz-title" id="quizTitle">Loading quiz...</h1>
           <div class="quiz-meta">
-            <span class="question-counter" id="questionCounter"
-              >Question: 0/0</span
-            >
+            <span class="question-counter" id="questionCounter">Question: 0/0</span>
             <span class="total-score" id="totalScore">Score: 0</span>
           </div>
         </div>

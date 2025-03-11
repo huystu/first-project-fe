@@ -1,9 +1,26 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  const loadingOverlay = document.getElementById("loadingOverlay");
+
+  // Show loading overlay and disable interactions
+  function showLoading() {
+    loadingOverlay.classList.add("active");
+    document.body.classList.add("loading-active");
+  }
+
+  // Hide loading overlay and enable interactions
+  function hideLoading() {
+    loadingOverlay.classList.remove("active");
+    document.body.classList.remove("loading-active");
+  }
+
+  showLoading(); // Show overlay immediately
+
   const urlParams = new URLSearchParams(window.location.search);
   const quizId = urlParams.get("id");
   const sessionId = urlParams.get("sessionId");
 
   if (!quizId || !sessionId) {
+    hideLoading();
     showError("Missing quiz or session information");
     return;
   }
@@ -55,8 +72,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     updateLeaderboard(leaderboard);
     updateResults(session, quiz);
     displayQuestionDetails(session, quiz);
+
+    hideLoading(); // Hide overlay only after all data is loaded
   } catch (error) {
     console.error("Error:", error);
+    hideLoading();
     showError(`Failed to load results: ${error.message}`);
   }
 });
@@ -204,7 +224,7 @@ function calculateTimeTaken(answers) {
 }
 
 function showError(message) {
-  // You can use SweetAlert2 here if you want
+  // Using alert as in your original code; could switch to SweetAlert2 if preferred
   alert(message);
   window.location.href = "../HomePage/HomPage.html";
 }

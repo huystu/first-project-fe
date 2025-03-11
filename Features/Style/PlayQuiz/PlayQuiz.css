@@ -6,6 +6,12 @@
   font-family: "Nunito", sans-serif;
 }
 
+html, body {
+  height: 100%; /* Ensure full height for body */
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background-color: #f0f2f5;
   min-height: 100vh;
@@ -22,6 +28,10 @@ body {
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  position: relative; /* Make container a positioning context for overlay */
+}
+.quiz-container.loading-active {
+  pointer-events: none;
 }
 
 /* Header styles */
@@ -209,6 +219,36 @@ body {
   animation: fadeIn 0.5s ease forwards;
 }
 
+/* Loading overlay styles */
+.loading-overlay {
+  position: absolute; /* Position relative to .quiz-container */
+  top: 0;
+  left: 0;
+  width: 100%; /* Match width of .quiz-container */
+  height: 100%; /* Match height of .quiz-container */
+  background: rgba(0, 0, 0, 0.7); /* Darker for better visibility */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Above all content within .quiz-container */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.loading-overlay.active {
+  opacity: 1;
+  pointer-events: auto; /* Blocks interactions within .quiz-container */
+}
+
+.loading-video {
+  width: 400px; /* Same size as before */
+  height: auto;
+  object-fit: contain; /* Preserve aspect ratio without stretching */
+  image-rendering: -webkit-optimize-contrast; /* Improve sharpness in Chrome */
+  image-rendering: crisp-edges; /* Improve sharpness in Firefox */
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .header {
@@ -240,6 +280,10 @@ body {
   .option-btn {
     padding: 15px;
     font-size: 1rem;
+  }
+
+  .loading-video {
+    width: 300px; /* Slightly smaller on mobile */
   }
 }
 
