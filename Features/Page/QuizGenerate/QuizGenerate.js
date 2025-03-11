@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       playNowBtn.style.display = "block";
       playNowBtn.onclick = () => {
-        window.location.href = `/Page/AnswerPage/AnswerPage.html?id=${result.quizSet.id}`;
+        window.location.href = `/Features/Page/PlayQuiz/PlayQuiz.html?id=${result.quizSet.id}`;
       };
     } catch (error) {
       console.error("Error generating quiz:", error);
