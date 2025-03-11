@@ -1,9 +1,26 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  const loadingOverlay = document.getElementById("loadingOverlay");
+
+  // Show loading overlay and disable interactions
+  function showLoading() {
+    loadingOverlay.classList.add("active");
+    document.body.classList.add("loading-active");
+  }
+
+  // Hide loading overlay and enable interactions
+  function hideLoading() {
+    loadingOverlay.classList.remove("active");
+    document.body.classList.remove("loading-active");
+  }
+
+  showLoading(); // Show overlay immediately
+
   const urlParams = new URLSearchParams(window.location.search);
   const quizId = urlParams.get("id");
   const sessionId = urlParams.get("sessionId");
 
   if (!quizId || !sessionId) {
+    hideLoading();
     showError("Missing quiz or session information");
     return;
   }
@@ -55,8 +72,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     updateLeaderboard(leaderboard);
     updateResults(session, quiz);
     displayQuestionDetails(session, quiz);
+
+    hideLoading(); // Hide overlay only after all data is loaded
   } catch (error) {
     console.error("Error:", error);
+    hideLoading();
     showError(`Failed to load results: ${error.message}`);
   }
 });
@@ -70,21 +90,35 @@ function updateQuizInfo(quiz) {
 function updateLeaderboard(leaderboard) {
   const leaderboardBody = document.getElementById("leaderboardBody");
   leaderboardBody.innerHTML = leaderboard
-    .map(
-      (entry, index) => `
-        <tr>
-            <td>${index + 1}</td>
-            <td>${entry.userId?.name || "Anonymous"}</td>
-            <td>${entry.score || 0}</td>
-            <td>${calculateTimeTaken(entry.questionAnswer || [])}</td>
-            <td>${
-              entry.dateFinished
-                ? new Date(entry.dateFinished).toLocaleDateString()
-                : "-"
-            }</td>
+    .map((entry, index) => {
+      let rankStyle = "";
+      let rankIcon = "";
+
+      if (index === 0) {
+        rankStyle = "background-color:  #FFF68F; font-weight: bold;";
+        rankIcon = "🥇";
+      } else if (index === 1) {
+        rankStyle = "background-color: #98F5FF; font-weight: bold;";
+        rankIcon = "🥈";
+      } else if (index === 2) {
+        rankStyle = "background-color: #54FF9F; font-weight: bold;";
+        rankIcon = "🥉";
+      }
+
+      return `
+        <tr style="${rankStyle}">
+          <td><span class="rank-icon">${rankIcon}</span> ${index + 1}</td>
+          <td>${entry.userId?.name || "Anonymous"}</td>
+          <td>${entry.score || 0}</td>
+          <td>${calculateTimeTaken(entry.questionAnswer || [])}</td>
+          <td>${
+            entry.dateFinished
+              ? new Date(entry.dateFinished).toLocaleDateString()
+              : "-"
+          }</td>
         </tr>
-    `
-    )
+      `;
+    })
     .join("");
 }
 
@@ -204,7 +238,7 @@ function calculateTimeTaken(answers) {
 }
 
 function showError(message) {
-  // You can use SweetAlert2 here if you want
+  // Using alert as in your original code; could switch to SweetAlert2 if preferred
   alert(message);
   window.location.href = "../HomePage/HomPage.html";
 }
