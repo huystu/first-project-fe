@@ -31,18 +31,28 @@ if (!googleBtn) {
   console.log("Google sign-in button found and ready");
 }
 
-btn.onclick = function () {
-  modal.style.visibility = "visible";
-};
+// Only enable modal click handlers if not logged in
+const enableModalHandlers = () => {
+  btn.onclick = function () {
+    modal.style.visibility = "visible";
+  };
 
-span.onclick = function () {
-  modal.style.visibility = "hidden";
-};
-
-window.onclick = function (event) {
-  if (event.target == modal) {
+  span.onclick = function () {
     modal.style.visibility = "hidden";
-  }
+  };
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.visibility = "hidden";
+    }
+  };
+};
+
+// Disable modal click handlers when logged in
+const disableModalHandlers = () => {
+  btn.onclick = null;
+  span.onclick = null;
+  window.onclick = null;
 };
 
 googleBtn.addEventListener("click", async () => {
@@ -86,6 +96,7 @@ googleBtn.addEventListener("click", async () => {
     localStorage.setItem("user", JSON.stringify(data.user));
 
     modal.style.visibility = "hidden";
+    disableModalHandlers();
 
     updateUIForLoggedInUser(data.user);
     Swal.fire({
@@ -102,8 +113,41 @@ googleBtn.addEventListener("click", async () => {
 function updateUIForLoggedInUser(user) {
   console.log("Updating UI for logged in user:", user);
   const signInBtn = document.getElementById("md-btn");
-  signInBtn.textContent = "Sign out";
-  signInBtn.onclick = signOut;
+  signInBtn.style.display = "none";
+
+  // Create profile button with click menu
+  const profileBtn = document.createElement("div");
+  profileBtn.id = "profile-btn";
+  profileBtn.innerHTML = `
+    <img src="${user.profilePicture}" alt="Profile">
+    <div class="profile-menu" style="display: none;">
+      <div class="profile-header">
+        <img src="${user.profilePicture}" alt="Profile">
+        <div class="profile-info">
+          <div class="profile-name">${user.name}</div>
+          <div class="profile-email">${user.email}</div>
+        </div>
+      </div>
+      <button class="signout-btn" onclick="signOut()">Sign Out</button>
+    </div>
+  `;
+
+  // Insert profile button where sign in button was
+  signInBtn.parentNode.insertBefore(profileBtn, signInBtn.nextSibling);
+
+  // Add click handler to toggle menu
+  const profileMenu = profileBtn.querySelector('.profile-menu');
+  profileBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    profileMenu.style.display = profileMenu.style.display === 'none' ? 'block' : 'none';
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!profileBtn.contains(e.target)) {
+      profileMenu.style.display = 'none';
+    }
+  });
 }
 
 async function signOut() {
@@ -114,10 +158,16 @@ async function signOut() {
     localStorage.removeItem("user");
 
     const signInBtn = document.getElementById("md-btn");
+    const profileBtn = document.getElementById("profile-btn");
+    
+    // Remove profile button and show sign in button
+    if (profileBtn) {
+      profileBtn.remove();
+    }
+    signInBtn.style.display = "block";
     signInBtn.textContent = "Sign in";
-    signInBtn.onclick = function () {
-      modal.style.visibility = "visible";
-    };
+    
+    enableModalHandlers();
     console.log("Sign out successful");
     Swal.fire({
       title: "Success",
@@ -126,7 +176,7 @@ async function signOut() {
     });
   } catch (error) {
     Swal.fire({
-      title: "Error",
+      title: "Error", 
       text: "Sign out failed",
       icon: "error",
     });
@@ -134,11 +184,15 @@ async function signOut() {
     alert("Failed to sign out. Please try again.");
   }
 }
+
 window.addEventListener("DOMContentLoaded", () => {
   console.log("Checking for existing user session...");
   const user = JSON.parse(localStorage.getItem("user"));
   if (user) {
     console.log("Found existing user session:", user);
     updateUIForLoggedInUser(user);
+    disableModalHandlers();
+  } else {
+    enableModalHandlers();
   }
 });

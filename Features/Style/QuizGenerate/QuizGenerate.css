@@ -399,3 +399,81 @@ select:not(:focus) {
   }
 }
 
+/* Add back button styles */
+.back-btn {
+  position: fixed;
+  left: 20px;
+  top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #000000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+  z-index: 10;
+}
+
+.back-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: #f5f5f5;
+}
+
+.back-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Add responsive styles for the back button */
+@media screen and (max-width: 768px) {
+  .back-btn {
+    left: 10px;
+    top: 10px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .back-btn img {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .back-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+  
+  .back-btn img {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .back-btn {
+    left: 30px;
+    top: 30px;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+  }
+  
+  .back-btn img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
