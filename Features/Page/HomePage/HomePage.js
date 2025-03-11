@@ -13,7 +13,7 @@ function getCardsPerPage() {
 // Function to fetch and display quizzes
 async function displayQuizzes() {
   try {
-    const response = await fetch("http://2.59.135.31:3000/api/quizzes/all");
+    const response = await fetch("http://2.59.135.31:3000/api/quizzes/new");
     if (!response.ok) {
       throw new Error("Failed to fetch quizzes");
     }
@@ -192,7 +192,7 @@ async function displayQuizzes() {
 // Function to display popular quizzes
 async function displayPopularQuizzes() {
   try {
-    const response = await fetch("http://2.59.135.31:3000/api/quizzes/all");
+    const response = await fetch("http://2.59.135.31:3000/api/quizzes/popular");
     if (!response.ok) {
       throw new Error("Failed to fetch quizzes");
     }
