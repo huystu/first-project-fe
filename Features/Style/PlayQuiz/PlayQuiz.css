@@ -7,7 +7,7 @@
 }
 
 html, body {
-  height: 100%; /* Ensure full height for body */
+  height: 100%;
   margin: 0;
   padding: 0;
 }
@@ -28,8 +28,9 @@ body {
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  position: relative; /* Make container a positioning context for overlay */
+  position: relative;
 }
+
 .quiz-container.loading-active {
   pointer-events: none;
 }
@@ -94,6 +95,10 @@ body {
   color: #1a1a1a;
   line-height: 1.5;
   font-weight: 600;
+  max-height: 120px; /* Limit height to prevent overlap with timer */
+  overflow-y: auto; /* Scroll if too long */
+  word-wrap: break-word; /* Auto line break for long text */
+  padding-right: 10px; /* Avoid scrollbar overlap */
 }
 
 /* Options styles */
@@ -117,16 +122,14 @@ body {
   align-items: center;
   gap: 15px;
   min-height: 80px;
+  opacity: 0; /* Start hidden for animation */
+  transform: translateY(20px); /* Slide in effect */
 }
 
-.option-label {
-  font-size: 1.2rem;
-  font-weight: bold;
-  min-width: 30px;
-}
-
-.option-text {
-  flex-grow: 1;
+.option-btn.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 /* Option colors */
@@ -202,35 +205,18 @@ body {
   opacity: 0.7;
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.question-container,
-.option-btn {
-  animation: fadeIn 0.5s ease forwards;
-}
-
 /* Loading overlay styles */
 .loading-overlay {
-  position: absolute; /* Position relative to .quiz-container */
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100%; /* Match width of .quiz-container */
-  height: 100%; /* Match height of .quiz-container */
-  background: rgba(0, 0, 0, 0.7); /* Darker for better visibility */
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Above all content within .quiz-container */
+  z-index: 1000;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -238,15 +224,15 @@ body {
 
 .loading-overlay.active {
   opacity: 1;
-  pointer-events: auto; /* Blocks interactions within .quiz-container */
+  pointer-events: auto;
 }
 
 .loading-video {
-  width: 400px; /* Same size as before */
+  width: 400px;
   height: auto;
-  object-fit: contain; /* Preserve aspect ratio without stretching */
-  image-rendering: -webkit-optimize-contrast; /* Improve sharpness in Chrome */
-  image-rendering: crisp-edges; /* Improve sharpness in Firefox */
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 /* Responsive design */
@@ -275,6 +261,7 @@ body {
 
   .question-text {
     font-size: 1.3rem;
+    max-height: 100px; /* Adjust for smaller screens */
   }
 
   .option-btn {
@@ -283,21 +270,15 @@ body {
   }
 
   .loading-video {
-    width: 300px; /* Slightly smaller on mobile */
+    width: 300px;
   }
 }
 
 /* Timer animation */
 @keyframes timerPulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 
 .timer.warning {
