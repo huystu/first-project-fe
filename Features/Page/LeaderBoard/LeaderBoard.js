@@ -70,21 +70,35 @@ function updateQuizInfo(quiz) {
 function updateLeaderboard(leaderboard) {
   const leaderboardBody = document.getElementById("leaderboardBody");
   leaderboardBody.innerHTML = leaderboard
-    .map(
-      (entry, index) => `
-        <tr>
-            <td>${index + 1}</td>
-            <td>${entry.userId?.name || "Anonymous"}</td>
-            <td>${entry.score || 0}</td>
-            <td>${calculateTimeTaken(entry.questionAnswer || [])}</td>
-            <td>${
-              entry.dateFinished
-                ? new Date(entry.dateFinished).toLocaleDateString()
-                : "-"
-            }</td>
+    .map((entry, index) => {
+      let rankStyle = "";
+      let rankIcon = "";
+
+      if (index === 0) {
+        rankStyle = "background-color:  #FFF68F; font-weight: bold;";
+        rankIcon = "🥇";
+      } else if (index === 1) {
+        rankStyle = "background-color: #98F5FF; font-weight: bold;";
+        rankIcon = "🥈";
+      } else if (index === 2) {
+        rankStyle = "background-color: #54FF9F; font-weight: bold;";
+        rankIcon = "🥉";
+      }
+
+      return `
+        <tr style="${rankStyle}">
+          <td><span class="rank-icon">${rankIcon}</span> ${index + 1}</td>
+          <td>${entry.userId?.name || "Anonymous"}</td>
+          <td>${entry.score || 0}</td>
+          <td>${calculateTimeTaken(entry.questionAnswer || [])}</td>
+          <td>${
+            entry.dateFinished
+              ? new Date(entry.dateFinished).toLocaleDateString()
+              : "-"
+          }</td>
         </tr>
-    `
-    )
+      `;
+    })
     .join("");
 }
 
