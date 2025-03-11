@@ -5,10 +5,20 @@
   font-family: "Nunito", sans-serif;
 }
 
+html, body {
+  height: 100%; /* Ensure full height for overlay */
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background-color: #f0f2f5;
   min-height: 100vh;
   padding: 20px;
+}
+
+body.loading-active {
+  pointer-events: none; /* Disable all interactions on body when loading */
 }
 
 .container {
@@ -253,6 +263,36 @@ tr:hover {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Loading overlay styles */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width of viewport */
+  height: 100%; /* Full height of viewport */
+  background: rgba(0, 0, 0, 0.7); /* Darker for better visibility */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Above all content */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.loading-overlay.active {
+  opacity: 1;
+  pointer-events: auto; /* Overlay blocks interactions */
+}
+
+.loading-video {
+  width: 400px; /* Same size as PlayQuiz */
+  height: auto;
+  object-fit: contain; /* Preserve aspect ratio without stretching */
+  image-rendering: -webkit-optimize-contrast; /* Improve sharpness in Chrome */
+  image-rendering: crisp-edges; /* Improve sharpness in Firefox */
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .container {
@@ -273,5 +313,9 @@ tr:hover {
 
   .btn {
     width: 100%;
+  }
+
+  .loading-video {
+    width: 300px; /* Same responsive scaling as PlayQuiz */
   }
 }
