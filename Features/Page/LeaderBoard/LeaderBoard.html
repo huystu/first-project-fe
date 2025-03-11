@@ -8,6 +8,12 @@
   <link rel="stylesheet" href="../../Style/HomePageStyle/HomePage.css">
   <link rel="stylesheet" href="../../Style/LeaderBoard/LeaderBoard.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+  <!-- Firebase App (the core Firebase SDK) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <!-- Add Firebase Auth -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <!-- Add other Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 </head>
 
 <body>
@@ -15,18 +21,19 @@
   <!-- Header giống với HomePage -->
   <header class="header">
     <div class="logo">
-      <img src="../../Assets/Img/ImgHomePage/logo.svg" alt="Quizy">
+      <a href="../HomePage/HomPage.html"><img src="../../Assets/Img/ImgHomePage/logo.svg" alt="Quizy" /></a>
     </div>
     <div class="join-game">
       <div class="join-game-content">
         <h1>Join Game? Enter PIN:</h1>
-        <input type="text" placeholder="123 456" class="pin-input">
+        <input type="text" placeholder="123 456" class="pin-input" />
       </div>
+
       <button class="search-btn">
-        <img src="../../Assets/Img/ImgHomePage/search.svg" alt="Search">
+        <img src="../../Assets/Img/ImgHomePage/search.svg" alt="Search" />
       </button>
     </div>
-    <button class="signin-btn" id="signin-btn">Sign in</button>
+    <button class="signin-btn" id="md-btn">Sign in</button>
   </header>
 
   <main class="container">
@@ -97,7 +104,26 @@
       <button class="btn play-again" onclick="playAgain()">Play Again</button>
     </div>
   </main>
-
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <h2>Sign in</h2>
+      <div class="flex-container">
+        <button class="google-btn" id="google-signin">
+          <img
+            src="../../Assets/Icon/google-icon-logo-svgrepo-com.svg"
+            alt="Google"
+          />
+          Sign in with Google
+        </button>
+        <div>
+          <span class="close" style="text-decoration: underline">Cancel</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Load SignInAPI.js after Firebase is loaded -->
+  <script src="../../API/SignIn-SignOut/SignInAPI.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="LeaderBoard.js"></script>
 </body>
 
