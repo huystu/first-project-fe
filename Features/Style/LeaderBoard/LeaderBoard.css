@@ -516,3 +516,108 @@ tr:hover {
     width: 300px; /* Same responsive scaling as PlayQuiz */
   }
 }
+
+/* Modal */
+.modal {
+  display: flex;
+  visibility: hidden;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #b4ebe6;
+  padding: clamp(15px, 4vw, 20px);
+  border: 1px solid #888;
+  border-radius: 25px;
+  width: 90%;
+  max-width: 400px;
+  margin: 20px;
+}
+
+.modal h2 {
+  text-align: center;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.modal .google-btn {
+  gap: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+  width: min(60%, 300px);
+  margin-bottom: 10px;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25), inset 0 -4px 0 rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  display: flex;
+  align-items: center;
+  &:active {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.25), inset 0 0 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.modal .google-btn img {
+  width: clamp(20px, 4vw, 24px);
+  height: clamp(20px, 4vw, 24px);
+  vertical-align: middle;
+}
+
+.close {
+  color: #aaaaaa;
+  font-size: clamp(16px, 3vw, 20px);
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.signin-btn {
+  background-color: #ffa500;
+  color: #000000;
+  border: none;
+  border-radius: 25px;
+  padding: 0.8rem 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 0 #e69500;
+  position: relative;
+  top: 0;
+}
+
+.signin-btn:hover {
+  background-color: #ff9100;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #e69500;
+}
+
+.signin-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 #e69500;
+  background-color: #f08800;
+}
