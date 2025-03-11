@@ -351,9 +351,39 @@ document.addEventListener("DOMContentLoaded", () => {
     generateBtn.addEventListener('click', (e) => {
       if (!isUserLoggedIn()) {
         e.preventDefault(); // Prevent default navigation
-        showSignInModal();
+        // Show SweetAlert first
+        Swal.fire({
+          icon: 'warning',
+          title: 'Authentication Required',
+          text: 'Please sign in to generate quizzes',
+          showCancelButton: true,
+          confirmButtonText: 'Sign In',
+          cancelButtonText: 'Cancel'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Show the sign in modal if user clicks "Sign In"
+            showSignInModal();
+            
+            // Add one-time listener for successful login
+            const checkLoginAndRedirect = () => {
+              if (isUserLoggedIn()) {
+                window.location.href = '../QuizGenerate/QuizGenerate.html';
+              }
+            };
+            
+            // Check every second for 60 seconds (1 minute) if user has logged in
+            const checkInterval = setInterval(() => {
+              checkLoginAndRedirect();
+            }, 1000);
+            
+            // Clear interval after 1 minute
+            setTimeout(() => {
+              clearInterval(checkInterval);
+            }, 60000);
+          }
+        });
       } else {
-        // If logged in, allow default navigation to QuizGenerate.html
+        // If logged in, allow navigation to QuizGenerate.html
         window.location.href = '../QuizGenerate/QuizGenerate.html';
       }
     });
@@ -508,8 +538,50 @@ function closeQuizView() {
 }
 
 function playQuiz(quizId) {
-  // Redirect to the play page with the quiz ID
-  window.location.href = `../PlayQuiz/PlayQuiz.html?id=${quizId}`;
+  // Check if user is logged in first
+  if (!isUserLoggedIn()) {
+    // Show sign in modal with a message
+    Swal.fire({
+      icon: 'warning',
+      title: 'Authentication Required',
+      text: 'Please sign in to play quizzes',
+      showCancelButton: true,
+      confirmButtonText: 'Sign In',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Show the sign in modal if user clicks "Sign In"
+        showSignInModal();
+        
+        // Store the quiz ID they were trying to play
+        sessionStorage.setItem('pendingQuizId', quizId);
+        
+        // Add one-time listener for successful login
+        const checkLoginAndRedirect = () => {
+          if (isUserLoggedIn()) {
+            const pendingQuizId = sessionStorage.getItem('pendingQuizId');
+            if (pendingQuizId) {
+              sessionStorage.removeItem('pendingQuizId');
+              window.location.href = `../PlayQuiz/PlayQuiz.html?id=${pendingQuizId}`;
+            }
+          }
+        };
+        
+        // Check every second for 60 seconds (1 minute) if user has logged in
+        const checkInterval = setInterval(() => {
+          checkLoginAndRedirect();
+        }, 1000);
+        
+        // Clear interval after 1 minute
+        setTimeout(() => {
+          clearInterval(checkInterval);
+        }, 60000);
+      }
+    });
+  } else {
+    // If logged in, proceed to play quiz
+    window.location.href = `../PlayQuiz/PlayQuiz.html?id=${quizId}`;
+  }
 }
 
 // Scroll to top functionality
