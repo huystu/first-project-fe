@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       // Fetch quiz data
       const quizResponse = await fetch(
-        `http://localhost:3000/api/quizzes/${quizId}`
+        `http://2.59.135.31:3000/api/quizzes/${quizId}`
       );
       if (!quizResponse.ok) throw new Error("Failed to fetch quiz");
       currentQuiz = await quizResponse.json();
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Fetch existing session
       const token = localStorage.getItem("token");
       const sessionResponse = await fetch(
-        `http://localhost:3000/api/sessions/active/${quizId}`,
+        `http://2.59.135.31:3000/api/sessions/active/${quizId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function createNewSession(quizId) {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:3000/api/sessions", {
+      const response = await fetch("http://2.59.135.31:3000/api/sessions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:3000/api/sessions/${currentSession._id}`,
+        `http://2.59.135.31:3000/api/sessions/${currentSession._id}`,
         {
           method: "PATCH",
           headers: {
@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:3000/api/sessions/${currentSession._id}`,
+        `http://2.59.135.31:3000/api/sessions/${currentSession._id}`,
         {
           method: "PATCH",
           headers: {

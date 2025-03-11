@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Fetch quiz details
     const quizResponse = await fetch(
-      `http://localhost:3000/api/quizzes/${quizId}`,
+      `http://2.59.135.31:3000/api/quizzes/${quizId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Fetch session details
     const sessionResponse = await fetch(
-      `http://localhost:3000/api/sessions/${sessionId}`,
+      `http://2.59.135.31:3000/api/sessions/${sessionId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Fetch leaderboard
     const leaderboardResponse = await fetch(
-      `http://localhost:3000/api/sessions/leaderboard/${quizId}`,
+      `http://2.59.135.31:3000/api/sessions/leaderboard/${quizId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
