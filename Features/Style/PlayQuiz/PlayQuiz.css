@@ -6,7 +6,8 @@
   font-family: "Nunito", sans-serif;
 }
 
-html, body {
+html,
+body {
   height: 100%; /* Ensure full height for body */
   margin: 0;
   padding: 0;
@@ -37,15 +38,20 @@ body {
 /* Header styles */
 .header {
   background: #e0f7f7;
-  padding: 20px 30px;
+  padding: 20px 50px; 
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  width: 100%; 
+  max-width: 1200px; 
+  margin: 0 auto; 
 }
 
+
 .quiz-info {
-  flex-grow: 1;
+  flex: 1; 
+  min-width: 60%; 
 }
 
 .quiz-title {
@@ -86,8 +92,13 @@ body {
 
 .question-container {
   margin-bottom: 30px;
-  text-align: center;
+  text-align: left;
+  max-width: 90%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  margin-left: 20px; 
 }
+
 
 .question-text {
   font-size: 1.5rem;
