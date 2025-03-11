@@ -6,6 +6,7 @@
   font-family: "Nunito", sans-serif;
 }
 
+
 html, body {
   height: 100%;
   margin: 0;
@@ -151,15 +152,20 @@ header {
 /* Header styles */
 .header {
   background: #e0f7f7;
-  padding: 20px 30px;
+  padding: 20px 50px; 
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  width: 100%; 
+  max-width: 1200px; 
+  margin: 0 auto; 
 }
 
+
 .quiz-info {
-  flex-grow: 1;
+  flex: 1; 
+  min-width: 60%; 
 }
 
 .quiz-title {
@@ -200,8 +206,13 @@ header {
 
 .question-container {
   margin-bottom: 30px;
-  text-align: center;
+  text-align: left;
+  max-width: 90%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  margin-left: 20px; 
 }
+
 
 .question-text {
   font-size: 1.5rem;
@@ -446,6 +457,7 @@ header {
     font-size: 1rem;
   }
 }
+
 
 /* Add responsive styles */
 @media screen and (max-width: 1200px) {
