@@ -195,7 +195,12 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    timeLeft = 10; // Reset timer for each new question
+    // Reset state for new question
+    timeLeft = 10;
+    isAnswerSelected = false;
+    animationInProgress = false;
+    currentAnimationIndex = 0;
+
     const question = currentQuiz.questions[currentQuestionIndex];
     questionCounter.textContent = `Question: ${currentQuestionIndex + 1}/${currentQuiz.questions.length}`;
     questionText.textContent = question.question;
@@ -203,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Reset options state and set to "Loading..."
     optionButtons.forEach((button) => {
       button.classList.remove("visible", "correct", "wrong");
-      button.disabled = true;
+      button.disabled = true; // Keep disabled until all options are shown
       document.querySelector(`#${button.id} .option-text`).textContent = "Loading..."; // Placeholder
     });
 
@@ -225,22 +230,29 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     animationInProgress = true;
-    currentAnimationIndex = 0;
+    console.log("Starting animation in displayQuestion, currentAnimationIndex:", currentAnimationIndex);
 
     for (; currentAnimationIndex < options.length; currentAnimationIndex++) {
-      if (isPaused) break; // Pause animation if popup is active
+      if (isPaused) {
+        console.log("Animation paused at index:", currentAnimationIndex);
+        break; // Pause animation if popup is active
+      }
       const button = document.getElementById(options[currentAnimationIndex].id);
+      console.log(`Showing option ${options[currentAnimationIndex].id} at index ${currentAnimationIndex}`);
       document.querySelector(`#${options[currentAnimationIndex].id} .option-text`).textContent = options[currentAnimationIndex].text; // Update from "Loading..."
       button.classList.add("visible");
-      await new Promise((resolve) => setTimeout(resolve, 400)); // 300ms per option
-      button.disabled = false;
-      if (currentAnimationIndex === options.length - 1 && !isPaused) { // Start timer when D appears
-        isAnswerSelected = false;
-        animationInProgress = false;
-        startTimer();
-      }
+      await new Promise((resolve) => setTimeout(resolve, 400)); // 400ms per option
+      // Do NOT enable button here; wait until all are shown
     }
-    animationInProgress = false; // Animation complete
+
+    if (!isPaused) {
+      // Enable all buttons only after animation completes
+      optionButtons.forEach((button) => (button.disabled = false));
+      console.log("Animation complete, enabling buttons and starting timer");
+      isAnswerSelected = false;
+      animationInProgress = false;
+      startTimer();
+    }
   }
 
   // Timer functionality
@@ -364,6 +376,8 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(timerInterval); // Stop timer
     const pausedTimeLeft = timeLeft; // Store current timeLeft
 
+    console.log("Paused at animationInProgress:", animationInProgress, "currentAnimationIndex:", currentAnimationIndex, "timeLeft:", timeLeft);
+
     const result = await Swal.fire({
       title: "Leave Quiz?",
       text: "Your progress will be saved. You can continue later. Are you sure you want to return to home?",
@@ -381,9 +395,10 @@ document.addEventListener("DOMContentLoaded", () => {
       isPaused = false; // Resume game
       if (!isAnswerSelected) {
         if (animationInProgress) {
-          // Resume animation from where it left off
-          resumeAnimation(currentAnimationIndex);
+          console.log("Resuming animation from index:", currentAnimationIndex);
+          await resumeAnimation(currentAnimationIndex); // Wait for animation to complete
         } else {
+          console.log("Resuming timer from timeLeft:", pausedTimeLeft);
           timeLeft = pausedTimeLeft; // Restore paused time
           startTimer(); // Resume timer from paused value
         }
@@ -400,22 +415,31 @@ document.addEventListener("DOMContentLoaded", () => {
       { id: "optionD", text: currentQuiz.questions[currentQuestionIndex].answer_d },
     ];
 
-    // No initial delay here since it only applies at question start
+    animationInProgress = true; // Indicate animation is resuming
+
+    console.log("Resuming animation from index:", startIndex);
+
     for (let i = startIndex; i < options.length; i++) {
-      if (isPaused) break; // Allow re-pausing if popup is triggered again
+      if (isPaused) {
+        console.log("Animation paused again at index:", i);
+        break; // Allow re-pausing if popup is triggered again
+      }
       const button = document.getElementById(options[i].id);
+      console.log(`Showing option ${options[i].id} at index ${i}`);
       document.querySelector(`#${options[i].id} .option-text`).textContent = options[i].text; // Update from "Loading..."
       button.classList.add("visible");
-      await new Promise((resolve) => setTimeout(resolve, 300)); // 300ms per option
-      button.disabled = false;
-      currentAnimationIndex = i + 1; // Update index
-      if (i === options.length - 1 && !isPaused) { // Start timer when D appears
-        isAnswerSelected = false;
-        animationInProgress = false;
-        startTimer();
-      }
+      await new Promise((resolve) => setTimeout(resolve, 400)); // 400ms per option
+      // Do NOT enable button here; wait until all are shown
     }
-    animationInProgress = false; // Animation complete
+
+    if (!isPaused) {
+      // Enable all buttons only after animation completes
+      optionButtons.forEach((button) => (button.disabled = false));
+      console.log("Animation complete, enabling buttons and starting timer");
+      isAnswerSelected = false;
+      animationInProgress = false;
+      startTimer();
+    }
   }
 
   // Event listeners
