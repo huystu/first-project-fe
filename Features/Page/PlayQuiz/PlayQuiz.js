@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const button = document.getElementById(options[currentAnimationIndex].id);
       document.querySelector(`#${options[currentAnimationIndex].id} .option-text`).textContent = options[currentAnimationIndex].text; // Update from "Loading..."
       button.classList.add("visible");
-      await new Promise((resolve) => setTimeout(resolve, 780)); // 300ms per option
+      await new Promise((resolve) => setTimeout(resolve, 400)); // 300ms per option
       button.disabled = false;
       if (currentAnimationIndex === options.length - 1 && !isPaused) { // Start timer when D appears
         isAnswerSelected = false;
