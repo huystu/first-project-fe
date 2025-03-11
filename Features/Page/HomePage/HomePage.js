@@ -371,7 +371,6 @@ function playQuiz(quizId) {
 document.addEventListener("DOMContentLoaded", function () {
   const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
-  // Hiển thị nút khi cuộn xuống 100px
   window.onscroll = function () {
     if (
       document.body.scrollTop > 100 ||
@@ -383,7 +382,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
-  // Xử lý sự kiện click
   scrollToTopBtn.addEventListener("click", function () {
     window.scrollTo({
       top: 0,

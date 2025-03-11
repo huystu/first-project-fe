@@ -129,9 +129,8 @@ function updateResults(session, quiz) {
       (answer) => answer.isCorrect
     ).length;
     document.getElementById("finalScore").textContent = session.score || 0;
-    document.getElementById(
-      "correctAnswers"
-    ).textContent = `${correctAnswers}/${quiz.questions.length}`;
+    document.getElementById("correctAnswers").textContent =
+      `${correctAnswers}/${quiz.questions.length}`;
     document.getElementById("timeTaken").textContent = calculateTimeTaken(
       session.questionAnswer || []
     );
@@ -252,3 +251,25 @@ function playAgain() {
 function goHome() {
   window.location.href = "../HomePage/HomPage.html";
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+  window.onscroll = function () {
+    if (
+      document.body.scrollTop > 100 ||
+      document.documentElement.scrollTop > 100
+    ) {
+      scrollToTopBtn.style.display = "flex";
+    } else {
+      scrollToTopBtn.style.display = "none";
+    }
+  };
+
+  scrollToTopBtn.addEventListener("click", function () {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+});
