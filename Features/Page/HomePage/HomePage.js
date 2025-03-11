@@ -141,24 +141,28 @@ async function displayPopularQuizzes() {
                         <h4>${quizSet.title}</h4>
                         <div class="quiz-meta">
                             <div class="quiz-meta-item">
-                                <span>Creator: ${
+                                <span>Creator:</span>
+                                <span>${
                                   quizSet.creator?.name || "Unknown"
                                 }</span>
                             </div>
                             <div class="quiz-meta-item">
-                                <span>Questions: ${
+                                <span>Questions:</span>
+                                <span>${
                                   quizSet.questions
                                     ? quizSet.questions.length
                                     : 0
                                 }</span>
                             </div>
                             <div class="quiz-meta-item">
-                                <span>Created: ${new Date(
+                                <span>Created:</span>
+                                <span>${new Date(
                                   quizSet.createdAt
                                 ).toLocaleDateString()}</span>
                             </div>
                             <div class="quiz-meta-item">
-                                <span>Plays: ${quizSet.playCount || 0}</span>
+                                <span>Plays:</span>
+                                <span>${quizSet.playCount || 0}</span>
                             </div>
                         </div>
                     </div>
@@ -362,3 +366,28 @@ function playQuiz(quizId) {
   // Redirect to the play page with the quiz ID
   window.location.href = `../PlayQuiz/PlayQuiz.html?id=${quizId}`;
 }
+
+// Scroll to top functionality
+document.addEventListener("DOMContentLoaded", function () {
+  const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+  // Hiển thị nút khi cuộn xuống 100px
+  window.onscroll = function () {
+    if (
+      document.body.scrollTop > 100 ||
+      document.documentElement.scrollTop > 100
+    ) {
+      scrollToTopBtn.style.display = "flex";
+    } else {
+      scrollToTopBtn.style.display = "none";
+    }
+  };
+
+  // Xử lý sự kiện click
+  scrollToTopBtn.addEventListener("click", function () {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+});
