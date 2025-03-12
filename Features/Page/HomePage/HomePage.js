@@ -78,7 +78,7 @@ async function displayQuizzes() {
     // Initialize carousel functionality
     let currentPage = 0;
     let cardsPerPage = getCardsPerPage();
-    const totalPages = Math.ceil(quizSets.length / cardsPerPage);
+    let totalPages = Math.ceil(quizSets.length / cardsPerPage);
     const cards = Array.from(cardsContainer.querySelectorAll(".quiz-card"));
 
     function updateCardPositions(cards, cardsPerPage, currentPage) {
@@ -264,7 +264,7 @@ async function displayPopularQuizzes() {
     // Initialize carousel functionality
     let currentPage = 0;
     let cardsPerPage = getCardsPerPage();
-    const totalPages = Math.ceil(sortedQuizSets.length / cardsPerPage);
+    let totalPages = Math.ceil(sortedQuizSets.length / cardsPerPage);
     const cards = Array.from(cardsContainer.querySelectorAll(".quiz-card"));
 
     function updateCarousel() {
