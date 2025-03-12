@@ -17,8 +17,6 @@ body {
 
 body {
   background-color: #f0f2f5;
-  min-height: 100vh;
-  padding: 20px;
 }
 
  .header {
@@ -30,11 +28,11 @@ body {
   border-bottom: 1px solid #e0e0e0;
   box-shadow: 0 4px 6px rgb(162, 162, 162);
   width: 100%;
-  position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
 }
+
 
 .logo img {
   width: 100px;
