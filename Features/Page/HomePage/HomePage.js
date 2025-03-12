@@ -13,7 +13,7 @@ function getCardsPerPage() {
 // Function to fetch and display quizzes
 async function displayQuizzes() {
   try {
-    const response = await fetch("http://2.59.135.31:3000/api/quizzes/new");
+    const response = await fetch("https://devplus.ipaine.com/api/quizzes/new");
     if (!response.ok) {
       throw new Error("Failed to fetch quizzes");
     }
@@ -212,7 +212,7 @@ async function displayQuizzes() {
 // Function to display popular quizzes
 async function displayPopularQuizzes() {
   try {
-    const response = await fetch("http://2.59.135.31:3000/api/quizzes/popular");
+    const response = await fetch("https://devplus.ipaine.com/api/quizzes/popular");
     if (!response.ok) {
       throw new Error("Failed to fetch quizzes");
     }
@@ -459,7 +459,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function viewQuiz(quizId) {
   try {
     const response = await fetch(
-      `http://2.59.135.31:3000/api/quizzes/${quizId}`
+      `https://devplus.ipaine.com/api/quizzes/${quizId}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch quiz details");
