@@ -2,7 +2,11 @@
   "version": 2,
   "routes": [
     {
+<<<<<<< HEAD
       "src": "/",
+=======
+      "src": "/HomePage",
+>>>>>>> 4646807cb9d3e23417eaf49dafd215dec6b4306c
       "dest": "/Features/Page/HomePage/HomPage.html"
     }
   ]
