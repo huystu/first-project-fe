@@ -1730,6 +1730,14 @@ footer {
     opacity 0.3s ease;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.3s !important;
+  }
+}
+
+
 /* Update card widths based on screen size */
 @media screen and (min-width: 1200px) {
   .quiz-card {
