@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.container');
     const yesBtn = document.querySelector('.yes-btn');
     const noBtn = document.querySelector('.no-btn');
-    const yesLink = document.querySelector('.yes-link');
+    const yesLink = document.querySelector('#yes-link');
     
     let clickCount = 0;
     const growthFactor = 1.2; // Increase size by 20% each click
