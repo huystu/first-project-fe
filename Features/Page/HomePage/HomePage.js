@@ -94,7 +94,7 @@ async function displayQuizzes() {
           card.style.display = "block";
           card.style.opacity = "1";
           card.style.transform = "translateX(0)";
-          card.style.left = `${positionInPage * (100 / cardsPerPage)}%`;
+          card.style.left = `${positionInPage * (100 / cardsPerPage)+ 0.66}%`;
         } else {
           card.style.display = "none";
           card.style.opacity = "0";
@@ -173,7 +173,7 @@ async function displayQuizzes() {
         card.style.display = "block";
         card.style.opacity = "1";
         card.style.transform = "translateX(0)";
-        card.style.left = `${positionInPage * (100 / cardsPerPage)}%`;
+        card.style.left = `${positionInPage * (100 / cardsPerPage)+ 0.66}%`;
       } else {
         card.style.display = "none";
         card.style.opacity = "0";
