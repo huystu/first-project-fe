@@ -675,20 +675,23 @@ function isUserLoggedIn() {
 
 // Function to handle host game button click
 async function handleHostGame() {
-  const { value: name } = await Swal.fire({
+  const result = await Swal.fire({
     title: "Enter your display name",
     input: "text",
     inputPlaceholder: "Your name",
-    allowOutsideClick: false,
+    allowOutsideClick: true,
+    showCancelButton: true,
+    confirmButtonText: 'Continue',
+    cancelButtonText: 'Cancel',
     inputValidator: (value) => {
       if (!value) {
         return "You need to enter a name!";
       }
-    },
+    }
   });
 
-  if (name) {
-    localStorage.setItem("displayName", name);
+  if (result.isConfirmed && result.value) {
+    localStorage.setItem("displayName", result.value);
     window.location.href = "../HostRoom/HostRoom.html";
   }
 }
