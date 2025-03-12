@@ -2,8 +2,8 @@
   "version": 2,
   "routes": [
     {
-      "src": "/HomePage",
-      "dest": "/Features/Page/HomePage/HomePage.html"
+      "src": "/",
+      "dest": "/Features/Page/HomePage/HomPage.html"
     }
   ]
 }
