@@ -140,6 +140,17 @@ function updateResults(session, quiz) {
   }
 }
 
+// Helper function to escape HTML tags
+function escapeHtml(text) {
+  if (!text) return "";
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 function displayQuestionDetails(session, quiz) {
   try {
     const container = document.getElementById("questionsContainer");
@@ -166,35 +177,35 @@ function displayQuestionDetails(session, quiz) {
                       ${answer.isCorrect ? "Correct" : "Wrong"}
                   </span>
               </div>
-              <p class="question-text">${question.question}</p>
+              <p class="question-text">${escapeHtml(question.question)}</p>
               <div class="answer-grid">
                   <div class="answer-option ${getAnswerClass(
                     "A",
                     question,
                     answer
                   )}">
-                      A. ${question.answer_a}
+                      A. ${escapeHtml(question.answer_a)}
                   </div>
                   <div class="answer-option ${getAnswerClass(
                     "B",
                     question,
                     answer
                   )}">
-                      B. ${question.answer_b}
+                      B. ${escapeHtml(question.answer_b)}
                   </div>
                   <div class="answer-option ${getAnswerClass(
                     "C",
                     question,
                     answer
                   )}">
-                      C. ${question.answer_c}
+                      C. ${escapeHtml(question.answer_c)}
                   </div>
                   <div class="answer-option ${getAnswerClass(
                     "D",
                     question,
                     answer
                   )}">
-                      D. ${question.answer_d}
+                      D. ${escapeHtml(question.answer_d)}
                   </div>
               </div>
               <div class="question-meta">

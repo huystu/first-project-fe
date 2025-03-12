@@ -14,6 +14,17 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentQuizData = null;
   let currentQuizId = null;
 
+  // Helper function to escape HTML tags
+  function escapeHtml(text) {
+    if (!text) return "";
+    return text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
   async function generateQuiz(isRegenerate = false) {
     const quizData = {
       topic: topicInput.value.trim(),
@@ -210,24 +221,24 @@ document.addEventListener("DOMContentLoaded", () => {
       questionElement.className = "question-item";
       questionElement.innerHTML = `
         <h3>Question ${index + 1}</h3>
-        <p>${question.question}</p>
+        <p>${escapeHtml(question.question)}</p>
         <p><strong>Options:</strong></p>
-        <p>A: ${question.answer_a}${
+        <p>A: ${escapeHtml(question.answer_a)}${
         question.correct_answer === "A"
           ? ' <span class="correct-answer">(Correct)</span>'
           : ""
       }</p>
-        <p>B: ${question.answer_b}${
+        <p>B: ${escapeHtml(question.answer_b)}${
         question.correct_answer === "B"
           ? ' <span class="correct-answer">(Correct)</span>'
           : ""
       }</p>
-        <p>C: ${question.answer_c}${
+        <p>C: ${escapeHtml(question.answer_c)}${
         question.correct_answer === "C"
           ? ' <span class="correct-answer">(Correct)</span>'
           : ""
       }</p>
-        <p>D: ${question.answer_d}${
+        <p>D: ${escapeHtml(question.answer_d)}${
         question.correct_answer === "D"
           ? ' <span class="correct-answer">(Correct)</span>'
           : ""

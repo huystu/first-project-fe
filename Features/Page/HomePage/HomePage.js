@@ -457,7 +457,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Add these new functions at the end of the file
+// Helper function to escape HTML tags
+function escapeHtml(text) {
+  if (!text) return "";
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 async function viewQuiz(quizId) {
   try {
     const response = await fetch(
@@ -474,11 +484,13 @@ async function viewQuiz(quizId) {
             <div class="quiz-view-modal" id="quizViewModal">
                 <div class="quiz-view-content">
                     <div class="quiz-view-header">
-                        <h2>${quiz.title}</h2>
+                        <h2>${escapeHtml(quiz.title)}</h2>
                         <button class="quiz-view-close" onclick="closeQuizView()">&times;</button>
                     </div>
                     <div class="quiz-view-description">
-                        <p>${quiz.description || "No description available"}</p>
+                        <p>${escapeHtml(
+                          quiz.description || "No description available"
+                        )}</p>
                     </div>
                     <div class="quiz-view-meta">
                         <div class="quiz-view-meta-item">
@@ -518,28 +530,28 @@ async function viewQuiz(quizId) {
                             (question, index) => `
                             <div class="quiz-question">
                                 <h3>Question ${index + 1}</h3>
-                                <p>${question.question}</p>
+                                <p>${escapeHtml(question.question)}</p>
                                 <div class="quiz-answers">
                                     <div class="answer${
                                       question.correct_answer === "A"
                                         ? " correct"
                                         : ""
-                                    }">A. ${question.answer_a}</div>
+                                    }">A. ${escapeHtml(question.answer_a)}</div>
                                     <div class="answer${
                                       question.correct_answer === "B"
                                         ? " correct"
                                         : ""
-                                    }">B. ${question.answer_b}</div>
+                                    }">B. ${escapeHtml(question.answer_b)}</div>
                                     <div class="answer${
                                       question.correct_answer === "C"
                                         ? " correct"
                                         : ""
-                                    }">C. ${question.answer_c}</div>
+                                    }">C. ${escapeHtml(question.answer_c)}</div>
                                     <div class="answer${
                                       question.correct_answer === "D"
                                         ? " correct"
                                         : ""
-                                    }">D. ${question.answer_d}</div>
+                                    }">D. ${escapeHtml(question.answer_d)}</div>
                                 </div>
                                 <div class="correct-answer">
                                     Correct Answer: ${question.correct_answer}

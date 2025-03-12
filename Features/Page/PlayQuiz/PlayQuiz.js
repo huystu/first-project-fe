@@ -11,6 +11,17 @@ document.addEventListener("DOMContentLoaded", () => {
   let animationInProgress = false; // Track if animation is running
   let currentAnimationIndex = 0; // Track current animation step
 
+  // Helper function to escape HTML tags
+  function escapeHtml(text) {
+    if (!text) return "";
+    return text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
   // DOM Elements
   const quizTitle = document.getElementById("quizTitle");
   const questionCounter = document.getElementById("questionCounter");
@@ -209,14 +220,16 @@ document.addEventListener("DOMContentLoaded", () => {
     questionCounter.textContent = `Question: ${currentQuestionIndex + 1}/${
       currentQuiz.questions.length
     }`;
-    questionText.textContent = question.question;
+    questionText.innerHTML = escapeHtml(question.question);
 
     // Reset options state and set to "Loading..."
     optionButtons.forEach((button) => {
       button.classList.remove("visible", "correct", "wrong");
       button.disabled = true; // Keep disabled until all options are shown
-      document.querySelector(`#${button.id} .option-text`).textContent =
-        "Loading..."; // Placeholder
+      const optionText = button.querySelector(".option-text");
+      if (optionText) {
+        optionText.innerHTML = "Loading..."; // Placeholder
+      }
     });
 
     // Reset status message
@@ -230,10 +243,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Show options sequentially
     const options = [
-      { id: "optionA", text: question.answer_a },
-      { id: "optionB", text: question.answer_b },
-      { id: "optionC", text: question.answer_c },
-      { id: "optionD", text: question.answer_d },
+      { id: "optionA", text: escapeHtml(question.answer_a) },
+      { id: "optionB", text: escapeHtml(question.answer_b) },
+      { id: "optionC", text: escapeHtml(question.answer_c) },
+      { id: "optionD", text: escapeHtml(question.answer_d) },
     ];
 
     animationInProgress = true;
@@ -251,12 +264,12 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(
         `Showing option ${options[currentAnimationIndex].id} at index ${currentAnimationIndex}`
       );
-      document.querySelector(
-        `#${options[currentAnimationIndex].id} .option-text`
-      ).textContent = options[currentAnimationIndex].text; // Update from "Loading..."
+      const optionText = button.querySelector(".option-text");
+      if (optionText) {
+        optionText.innerHTML = options[currentAnimationIndex].text;
+      }
       button.classList.add("visible");
       await new Promise((resolve) => setTimeout(resolve, 400)); // 400ms per option
-      // Do NOT enable button here; wait until all are shown
     }
 
     if (!isPaused) {
@@ -465,8 +478,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       const button = document.getElementById(options[i].id);
       console.log(`Showing option ${options[i].id} at index ${i}`);
-      document.querySelector(`#${options[i].id} .option-text`).textContent =
-        options[i].text; // Update from "Loading..."
+      const optionText = button.querySelector(".option-text");
+      if (optionText) {
+        optionText.innerHTML = options[i].text;
+      }
       button.classList.add("visible");
       await new Promise((resolve) => setTimeout(resolve, 400)); // 400ms per option
       // Do NOT enable button here; wait until all are shown
