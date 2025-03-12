@@ -239,7 +239,7 @@ select:not(:focus) {
   justify-content: center;
   width: 100%;
 }
-
+.view-questions-btn,
 .play-now-btn,
 .back-home-btn {
   padding: clamp(0.5rem, 2vw, 0.75rem) clamp(0.75rem, 3vw, 1.5rem);
@@ -255,6 +255,11 @@ select:not(:focus) {
   max-width: 230px;
 }
 
+.view-questions-btn {
+  background-color: var(--primary-color);
+  color: black;
+}
+
 .play-now-btn {
   background-color: var(--secondary-color);
   color: black;
@@ -263,6 +268,11 @@ select:not(:focus) {
 .back-home-btn {
   background-color: var(--primary-color);
   color: black;
+}
+
+.view-questions-btn:hover {
+  background-color: #00a89f;
+  transform: scale(1.05);
 }
 
 .play-now-btn:hover {
@@ -288,6 +298,7 @@ select:not(:focus) {
     align-items: center;
   }
 
+  .view-questions-btn,
   .play-now-btn,
   .back-home-btn {
     width: 100%;
