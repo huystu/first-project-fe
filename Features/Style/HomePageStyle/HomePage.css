@@ -130,6 +130,7 @@ body {
   padding: 2rem;
   display: flex;
   justify-content: center;
+  gap: 2rem;
   width: 100%;
   max-width: 1920px;
   margin: 0 auto;
@@ -144,6 +145,16 @@ body {
   text-align: center;
   max-width: 500px;
   gap: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.play-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.play-card.multiplayer {
+  background-color: #ffe0f7;
 }
 
 .play-content {
@@ -169,7 +180,8 @@ body {
   justify-content: center;
 }
 
-.generate-btn {
+.generate-btn,
+.host-btn {
   background-color: #a1febe;
   border: none;
   border-radius: 25px;
@@ -184,16 +196,44 @@ body {
   font-size: 1rem;
 }
 
+.host-btn {
+  background-color: #fea1e6;
+  box-shadow: 0 4px 0 #fea1e6;
+}
+
 .generate-btn:hover {
   background-color: #a1febe;
   transform: translateY(-2px);
   box-shadow: 0 6px 0 #9af2b5;
 }
 
+.host-btn:hover {
+  background-color: #fea1e6;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #f29ae2;
+}
+
 .generate-btn:active {
   transform: translateY(4px);
   box-shadow: 0 0 0 #9af2b5;
   background-color: #95eaa7;
+}
+
+.host-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 #f29ae2;
+  background-color: #ea95e0;
+}
+
+@media screen and (max-width: 1024px) {
+  .generate-quiz {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .play-card {
+    width: 100%;
+  }
 }
 
 /* Quiz Sections */
@@ -646,17 +686,13 @@ footer {
   cursor: pointer;
   width: min(60%, 300px);
   margin-bottom: 10px;
-  box-shadow:
-    0 4px 0 rgba(0, 0, 0, 0.25),
-    inset 0 -4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25), inset 0 -4px 0 rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s ease;
   font-size: clamp(0.9rem, 2vw, 1rem);
   display: flex;
   align-items: center;
   &:active {
-    box-shadow:
-      0 0 4px rgba(0, 0, 0, 0.25),
-      inset 0 0 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.25), inset 0 0 4px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -752,7 +788,7 @@ footer {
   .quiz-section {
     padding: 2rem;
   }
-  
+
   .quiz-card {
     width: calc(33.33% - 1rem);
   }
@@ -1467,14 +1503,14 @@ footer {
   right: -10%;
   background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: 16px;
   min-width: 250px;
   z-index: 1000;
 }
 
 .profile-menu::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -8px;
   right: 16px;
@@ -1482,7 +1518,7 @@ footer {
   height: 16px;
   background: white;
   transform: rotate(45deg);
-  box-shadow: -2px -2px 5px rgba(0,0,0,0.05);
+  box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.05);
 }
 
 #profile-btn:hover .profile-menu {
@@ -1539,23 +1575,23 @@ footer {
   #profile-btn {
     margin: 0 auto;
   }
-  
+
   .profile-menu {
     right: 50%;
     transform: translateX(50%);
     min-width: 280px;
   }
-  
+
   .profile-menu::before {
     right: 50%;
     transform: translateX(50%) rotate(45deg);
   }
-  
+
   .profile-header {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .profile-info {
     align-items: center;
   }
@@ -1566,7 +1602,7 @@ footer {
     width: 28px;
     height: 28px;
   }
-  
+
   .profile-menu {
     min-width: 90vw;
     max-width: 320px;
@@ -1575,7 +1611,7 @@ footer {
     right: auto;
     transform: translateX(-50%);
   }
-  
+
   .profile-header img {
     width: 40px;
     height: 40px;
@@ -1587,25 +1623,25 @@ footer {
     width: 40px;
     height: 40px;
   }
-  
+
   .profile-menu {
     min-width: 300px;
     padding: 20px;
   }
-  
+
   .profile-header img {
     width: 60px;
     height: 60px;
   }
-  
+
   .profile-name {
     font-size: 1.2rem;
   }
-  
+
   .profile-email {
     font-size: 1rem;
   }
-  
+
   .signout-btn {
     padding: 12px;
     font-size: 1.1rem;
@@ -1727,7 +1763,10 @@ footer {
 }
 
 /* Update animations for smoother transitions */
-.sliding-out-left, .sliding-out-right, .sliding-in-left, .sliding-in-right {
+.sliding-out-left,
+.sliding-out-right,
+.sliding-in-left,
+.sliding-in-right {
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
