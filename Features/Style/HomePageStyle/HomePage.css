@@ -105,7 +105,7 @@ body {
   box-shadow: 0 4px 0 #e69500;
   position: relative;
   top: 0;
-  img{
+  img {
     width: clamp(30px, 4vw, 30px);
     height: clamp(30px, 4vw, 30px);
     vertical-align: middle;
@@ -1017,12 +1017,6 @@ footer {
     border-radius: 30px;
     margin-top: 1.5rem;
   }
-
-  .quiz-card {
-    flex: 0 0 400px;
-    min-width: 400px;
-    height: 280px;
-  }
 }
 
 @media screen and (min-width: 1600px) {
@@ -1769,6 +1763,14 @@ footer {
 .sliding-in-right {
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.3s !important;
+  }
+}
+
 
 /* Update card widths based on screen size */
 @media screen and (min-width: 1200px) {
