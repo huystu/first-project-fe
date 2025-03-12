@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quizy</title>
+    <link rel="stylesheet" href="Features/Style/HomePageStyle/HomePage.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <!-- Add Firebase Auth -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <!-- Add other Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="/Features/Page/HomePage/HomePage.js"></script>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">
+        <a href="/Features/Page/HomePage/HomPage.html"><img src="Features\Assets\Img\ImgHomePage\logo.svg" alt="Quizy" /></a>
+      </div>
+      <button class="signin-btn" id="md-btn">
+        <img src="/Features/Assets/Icon/google-icon-logo-svgrepo-com.svg" alt="Google"/>
+        Sign in
+      </button>
+    </header>
+    <main>
+      <div class="container">
+        <a href="Features/Page/HomePage/HomPage.html" class="yes-link">
+          <button class="choice-btn yes-btn">Yes</button>
+        </a>
+        <button class="choice-btn no-btn">No</button>
+      </div>
+    </main>
+
+    <button id="scrollToTopBtn">▲</button>
+
+    <footer>
+      <div class="footer-content">
+        <span>© Devplus</span>
+        <span>•</span>
+        <a href="#">Contact</a>
+        <span>•</span>
+        <a href="#">Terms of Privacy</a>
+      </div>
+    </footer>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <h2>Sign in</h2>
+        <div class="flex-container">
+          <button class="google-btn" id="google-signin">
+            <img
+              src="Features/Assets/Icon/google-icon-logo-svgrepo-com.svg"
+              alt="Google"
+            />
+            Sign in with Google
+          </button>
+          <div>
+            <span class="close" style="text-decoration: underline">Cancel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Load SignInAPI.js after Firebase is loaded -->
+    <script src="Features/API/SignIn-SignOut/SignInAPI.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>

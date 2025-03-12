@@ -1,0 +1,63 @@
+.container {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  height: 100vh;
+  width: 100%;
+  padding: 2rem;
+  position: relative;
+}
+
+.choice-btn {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  min-width: 120px;
+}
+
+.yes-btn {
+  background-color: #a1febe;
+  box-shadow: 0 4px 0 #9af2b5;
+  transition: all 0.3s ease-in-out;
+}
+
+.yes-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #9af2b5;
+}
+
+.no-btn {
+  background-color: #ffa500;
+  box-shadow: 0 4px 0 #e69500;
+  transition: all 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.no-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #e69500;
+}
+
+.yes-btn.expanded {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem 4rem;
+  font-size: 2.4rem;
+  min-width: 240px;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.no-btn.shrinking {
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  min-width: 60px;
+  position: absolute;
+  transition: all 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
