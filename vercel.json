@@ -3,7 +3,7 @@
   "routes": [
     {
       "src": "/HomePage",
-      "dest": "/Features/Page/HomePage/HomePage.html"
+      "dest": "/Features/Page/HomePage/HomPage.html"
     }
   ]
 }
