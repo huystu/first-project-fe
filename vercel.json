@@ -1,6 +1,7 @@
-{
   "version": 2,
-  "rewrites": [
-    { "source": "/home", "destination": "/Features/Page/HomePage/HomPage.html" }
-  ]
-}
+   "routes": [
+     {
+       "src": "/",
+       "dest": "/Features/Page/HomePage/HomPage.html"
+     }
+   ]
