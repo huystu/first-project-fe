@@ -130,6 +130,7 @@ body {
   padding: 2rem;
   display: flex;
   justify-content: center;
+  gap: 2rem;
   width: 100%;
   max-width: 1920px;
   margin: 0 auto;
@@ -144,6 +145,16 @@ body {
   text-align: center;
   max-width: 500px;
   gap: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.play-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.play-card.multiplayer {
+  background-color: #ffe0f7;
 }
 
 .play-content {
@@ -169,7 +180,8 @@ body {
   justify-content: center;
 }
 
-.generate-btn {
+.generate-btn,
+.host-btn {
   background-color: #a1febe;
   border: none;
   border-radius: 25px;
@@ -184,16 +196,44 @@ body {
   font-size: 1rem;
 }
 
+.host-btn {
+  background-color: #fea1e6;
+  box-shadow: 0 4px 0 #fea1e6;
+}
+
 .generate-btn:hover {
   background-color: #a1febe;
   transform: translateY(-2px);
   box-shadow: 0 6px 0 #9af2b5;
 }
 
+.host-btn:hover {
+  background-color: #fea1e6;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #f29ae2;
+}
+
 .generate-btn:active {
   transform: translateY(4px);
   box-shadow: 0 0 0 #9af2b5;
   background-color: #95eaa7;
+}
+
+.host-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 #f29ae2;
+  background-color: #ea95e0;
+}
+
+@media screen and (max-width: 1024px) {
+  .generate-quiz {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .play-card {
+    width: 100%;
+  }
 }
 
 /* Quiz Sections */
@@ -646,17 +686,13 @@ footer {
   cursor: pointer;
   width: min(60%, 300px);
   margin-bottom: 10px;
-  box-shadow:
-    0 4px 0 rgba(0, 0, 0, 0.25),
-    inset 0 -4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25), inset 0 -4px 0 rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s ease;
   font-size: clamp(0.9rem, 2vw, 1rem);
   display: flex;
   align-items: center;
   &:active {
-    box-shadow:
-      0 0 4px rgba(0, 0, 0, 0.25),
-      inset 0 0 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.25), inset 0 0 4px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -1725,9 +1761,7 @@ footer {
 .sliding-out-right,
 .sliding-in-left,
 .sliding-in-right {
-  transition:
-    transform 0.3s ease,
-    opacity 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {

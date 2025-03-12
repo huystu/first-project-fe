@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Host Room - Quizy</title>
+    <link rel="stylesheet" href="../../Style/HostRoom/HostRoom.css" />
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      function loadQRCode() {
+        return new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src =
+            "https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js";
+          script.onload = resolve;
+          script.onerror = () =>
+            reject(new Error("Failed to load QR code library"));
+          document.head.appendChild(script);
+        });
+      }
+      loadQRCode().catch(console.error);
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="room-info">
+        <h1>Room Code: <span id="roomCode">Loading...</span></h1>
+        <div id="qrCode"></div>
+        <p>Share this code with friends to join!</p>
+      </div>
+
+      <div class="host-controls">
+        <div class="setting-group">
+          <label for="quizSelect">Select Quiz Set:</label>
+          <select id="quizSelect">
+            <option value="">Loading quiz sets...</option>
+          </select>
+        </div>
+
+        <div class="setting-group">
+          <label for="timeSelect">Time per Question (seconds):</label>
+          <select id="timeSelect">
+            <option value="10">10 seconds</option>
+            <option value="20">20 seconds</option>
+            <option value="30" selected>30 seconds</option>
+            <option value="45">45 seconds</option>
+            <option value="60">60 seconds</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="players-section">
+        <h2>Players in Room</h2>
+        <div class="players-list" id="playersList">
+          <!-- Players will be added here dynamically -->
+        </div>
+        <div class="waiting-message">
+          <p>Waiting for players to join...</p>
+          <p class="min-players-note">* Need at least 2 players to start</p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="startBtn" disabled>Start Game</button>
+        <button id="backBtn">Leave Room</button>
+      </div>
+    </div>
+
+    <script src="HostRoom.js"></script>
+  </body>
+</html>

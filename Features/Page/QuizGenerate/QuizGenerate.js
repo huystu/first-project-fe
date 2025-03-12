@@ -101,6 +101,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!isRegenerate) {
         container.classList.remove("loading");
         container.classList.add("completed");
+        // Hide the back button when quiz generation is complete
+        document.querySelector('.back-btn').style.display = 'none';
       }
 
       localStorage.setItem("generatedQuizId", result.quizSet.id);

@@ -441,6 +441,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // Clear the message
     sessionStorage.removeItem("authMessage");
   }
+
+  // Add event listeners for multiplayer
+  const hostBtn = document.querySelector(".host-btn");
+  const searchBtn = document.querySelector(".search-btn");
+
+  if (hostBtn) {
+    hostBtn.addEventListener("click", handleHostGame);
+  }
+
+  if (searchBtn) {
+    searchBtn.addEventListener("click", handleJoinGame);
+  }
 });
 
 // Add these new functions at the end of the file
@@ -659,4 +671,57 @@ function showSignInModal() {
 // Add this function to check if user is logged in
 function isUserLoggedIn() {
   return localStorage.getItem("user") !== null;
+}
+
+// Function to handle host game button click
+async function handleHostGame() {
+  const { value: name } = await Swal.fire({
+    title: "Enter your display name",
+    input: "text",
+    inputPlaceholder: "Your name",
+    allowOutsideClick: false,
+    inputValidator: (value) => {
+      if (!value) {
+        return "You need to enter a name!";
+      }
+    },
+  });
+
+  if (name) {
+    localStorage.setItem("displayName", name);
+    window.location.href = "../HostRoom/HostRoom.html";
+  }
+}
+
+// Function to handle join game button click
+async function handleJoinGame() {
+  const pinInput = document.querySelector(".pin-input");
+  // Remove any spaces and convert to uppercase
+  const roomId = pinInput.value.trim().toUpperCase().replace(/\s+/g, "");
+
+  if (!roomId || roomId.length !== 6) {
+    Swal.fire({
+      icon: "warning",
+      title: "Invalid Room Code",
+      text: "Please enter a valid 6-character room code",
+    });
+    return;
+  }
+
+  const { value: name } = await Swal.fire({
+    title: "Enter your display name",
+    input: "text",
+    inputPlaceholder: "Your name",
+    allowOutsideClick: false,
+    inputValidator: (value) => {
+      if (!value) {
+        return "You need to enter a name!";
+      }
+    },
+  });
+
+  if (name) {
+    localStorage.setItem("displayName", name);
+    window.location.href = `../PlayerRoom/PlayerRoom.html?roomId=${roomId}`;
+  }
 }

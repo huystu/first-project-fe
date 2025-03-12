@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Player Room - Quizy</title>
+    <link rel="stylesheet" href="../../Style/PlayerRoom/PlayerRoom.css" />
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="room-info">
+        <h1>Room Code: <span id="roomCode">Loading...</span></h1>
+        <div class="quiz-info">
+          <h2>
+            Quiz: <span id="quizTitle">Waiting for host to select...</span>
+          </h2>
+          <p>Time per Question: <span id="timePerQuestion">30</span> seconds</p>
+        </div>
+      </div>
+
+      <div class="players-section">
+        <div class="players-list">
+          <h2>Players in Room</h2>
+          <div id="playersList">
+            <!-- Players will be added here dynamically -->
+          </div>
+        </div>
+
+        <div class="waiting-message">
+          <p>Waiting for host to start the game...</p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="backBtn">Leave Room</button>
+      </div>
+    </div>
+
+    <script src="PlayerRoom.js"></script>
+  </body>
+</html>
