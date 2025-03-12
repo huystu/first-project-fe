@@ -105,7 +105,7 @@ body {
   box-shadow: 0 4px 0 #e69500;
   position: relative;
   top: 0;
-  img{
+  img {
     width: clamp(30px, 4vw, 30px);
     height: clamp(30px, 4vw, 30px);
     vertical-align: middle;
@@ -752,7 +752,7 @@ footer {
   .quiz-section {
     padding: 2rem;
   }
-  
+
   .quiz-card {
     width: calc(33.33% - 1rem);
   }
@@ -980,12 +980,6 @@ footer {
     font-size: 1.2rem;
     border-radius: 30px;
     margin-top: 1.5rem;
-  }
-
-  .quiz-card {
-    flex: 0 0 400px;
-    min-width: 400px;
-    height: 280px;
   }
 }
 
@@ -1467,14 +1461,14 @@ footer {
   right: -10%;
   background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: 16px;
   min-width: 250px;
   z-index: 1000;
 }
 
 .profile-menu::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -8px;
   right: 16px;
@@ -1482,7 +1476,7 @@ footer {
   height: 16px;
   background: white;
   transform: rotate(45deg);
-  box-shadow: -2px -2px 5px rgba(0,0,0,0.05);
+  box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.05);
 }
 
 #profile-btn:hover .profile-menu {
@@ -1539,23 +1533,23 @@ footer {
   #profile-btn {
     margin: 0 auto;
   }
-  
+
   .profile-menu {
     right: 50%;
     transform: translateX(50%);
     min-width: 280px;
   }
-  
+
   .profile-menu::before {
     right: 50%;
     transform: translateX(50%) rotate(45deg);
   }
-  
+
   .profile-header {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .profile-info {
     align-items: center;
   }
@@ -1566,7 +1560,7 @@ footer {
     width: 28px;
     height: 28px;
   }
-  
+
   .profile-menu {
     min-width: 90vw;
     max-width: 320px;
@@ -1575,7 +1569,7 @@ footer {
     right: auto;
     transform: translateX(-50%);
   }
-  
+
   .profile-header img {
     width: 40px;
     height: 40px;
@@ -1587,25 +1581,25 @@ footer {
     width: 40px;
     height: 40px;
   }
-  
+
   .profile-menu {
     min-width: 300px;
     padding: 20px;
   }
-  
+
   .profile-header img {
     width: 60px;
     height: 60px;
   }
-  
+
   .profile-name {
     font-size: 1.2rem;
   }
-  
+
   .profile-email {
     font-size: 1rem;
   }
-  
+
   .signout-btn {
     padding: 12px;
     font-size: 1.1rem;
@@ -1727,8 +1721,13 @@ footer {
 }
 
 /* Update animations for smoother transitions */
-.sliding-out-left, .sliding-out-right, .sliding-in-left, .sliding-in-right {
-  transition: transform 0.3s ease, opacity 0.3s ease;
+.sliding-out-left,
+.sliding-out-right,
+.sliding-in-left,
+.sliding-in-right {
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
 /* Update card widths based on screen size */

@@ -82,37 +82,48 @@ async function displayQuizzes() {
     const cards = Array.from(cardsContainer.querySelectorAll(".quiz-card"));
 
     function updateCardPositions(cards, cardsPerPage, currentPage) {
-      const containerWidth = document.querySelector('.cards-container').offsetWidth;
+      const containerWidth =
+        document.querySelector(".cards-container").offsetWidth;
       const cardWidth = containerWidth / cardsPerPage;
-      
+
       cards.forEach((card, index) => {
         const pageIndex = Math.floor(index / cardsPerPage);
         const positionInPage = index % cardsPerPage;
-        
+
         if (pageIndex === currentPage) {
-          card.style.display = 'block';
-          card.style.opacity = '1';
-          card.style.transform = 'translateX(0)';
+          card.style.display = "block";
+          card.style.opacity = "1";
+          card.style.transform = "translateX(0)";
           card.style.left = `${positionInPage * (100 / cardsPerPage)}%`;
         } else {
-          card.style.display = 'none';
-          card.style.opacity = '0';
+          card.style.display = "none";
+          card.style.opacity = "0";
         }
       });
     }
 
     function updateCarousel() {
-      const slideDirection = this?.classList?.contains('next-btn') ? 'left' : 'right';
+      const slideDirection = this?.classList?.contains("next-btn")
+        ? "left"
+        : "right";
       const startIndex = currentPage * cardsPerPage;
       const endIndex = startIndex + cardsPerPage;
-      const nextStartIndex = slideDirection === 'left' ? startIndex + cardsPerPage : startIndex - cardsPerPage;
+      const nextStartIndex =
+        slideDirection === "left"
+          ? startIndex + cardsPerPage
+          : startIndex - cardsPerPage;
       const nextEndIndex = nextStartIndex + cardsPerPage;
 
       // Show and animate current cards sliding out
       cards.slice(startIndex, endIndex).forEach((card, i) => {
         card.style.display = "block";
         card.style.left = `${i * (100 / cardsPerPage)}%`;
-        card.classList.remove('sliding-out-left', 'sliding-out-right', 'sliding-in-left', 'sliding-in-right');
+        card.classList.remove(
+          "sliding-out-left",
+          "sliding-out-right",
+          "sliding-in-left",
+          "sliding-in-right"
+        );
         card.classList.add(`sliding-out-${slideDirection}`);
       });
 
@@ -120,7 +131,12 @@ async function displayQuizzes() {
       cards.slice(nextStartIndex, nextEndIndex).forEach((card, i) => {
         card.style.display = "block";
         card.style.left = `${i * (100 / cardsPerPage)}%`;
-        card.classList.remove('sliding-out-left', 'sliding-out-right', 'sliding-in-left', 'sliding-in-right');
+        card.classList.remove(
+          "sliding-out-left",
+          "sliding-out-right",
+          "sliding-in-left",
+          "sliding-in-right"
+        );
         card.classList.add(`sliding-in-${slideDirection}`);
       });
 
@@ -134,14 +150,14 @@ async function displayQuizzes() {
     const prevBtn = quizGrid.querySelector(".prev-btn");
     const nextBtn = quizGrid.querySelector(".next-btn");
 
-    prevBtn.addEventListener("click", function() {
+    prevBtn.addEventListener("click", function () {
       if (currentPage > 0) {
         updateCarousel.call(this);
         currentPage--;
       }
     });
 
-    nextBtn.addEventListener("click", function() {
+    nextBtn.addEventListener("click", function () {
       if (currentPage < totalPages - 1) {
         updateCarousel.call(this);
         currentPage++;
@@ -152,38 +168,42 @@ async function displayQuizzes() {
     cards.forEach((card, index) => {
       const pageIndex = Math.floor(index / cardsPerPage);
       const positionInPage = index % cardsPerPage;
-      
+
       if (pageIndex === 0) {
-        card.style.display = 'block';
-        card.style.opacity = '1';
-        card.style.transform = 'translateX(0)';
+        card.style.display = "block";
+        card.style.opacity = "1";
+        card.style.transform = "translateX(0)";
         card.style.left = `${positionInPage * (100 / cardsPerPage)}%`;
       } else {
-        card.style.display = 'none';
-        card.style.opacity = '0';
+        card.style.display = "none";
+        card.style.opacity = "0";
       }
     });
 
     // Update cards per page on window resize
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       const newCardsPerPage = getCardsPerPage();
       if (newCardsPerPage !== cardsPerPage) {
         cardsPerPage = newCardsPerPage;
         currentPage = 0; // Reset to first page
-        
+
         // Remove all animation classes
-        cards.forEach(card => {
-          card.classList.remove('sliding-out-left', 'sliding-out-right', 'sliding-in-left', 'sliding-in-right');
+        cards.forEach((card) => {
+          card.classList.remove(
+            "sliding-out-left",
+            "sliding-out-right",
+            "sliding-in-left",
+            "sliding-in-right"
+          );
         });
-        
+
         // Update card positions without animation
         updateCardPositions(cards, cardsPerPage, currentPage);
-        
+
         // Update total pages
         totalPages = Math.ceil(cards.length / cardsPerPage);
       }
     });
-
   } catch (error) {
     console.error("Error fetching quizzes:", error);
   }
@@ -268,28 +288,42 @@ async function displayPopularQuizzes() {
     const cards = Array.from(cardsContainer.querySelectorAll(".quiz-card"));
 
     function updateCarousel() {
-      const slideDirection = this?.classList?.contains('next-btn') ? 'left' : 'right';
+      const slideDirection = this?.classList?.contains("next-btn")
+        ? "left"
+        : "right";
       const startIndex = currentPage * cardsPerPage;
       const endIndex = startIndex + cardsPerPage;
-      const nextStartIndex = slideDirection === 'left' ? endIndex : startIndex - cardsPerPage;
-      const nextEndIndex = slideDirection === 'left' ? endIndex + cardsPerPage : startIndex;
+      const nextStartIndex =
+        slideDirection === "left" ? endIndex : startIndex - cardsPerPage;
+      const nextEndIndex =
+        slideDirection === "left" ? endIndex + cardsPerPage : startIndex;
 
       // First make all cards invisible except current and next set
-      cards.forEach(card => {
+      cards.forEach((card) => {
         card.style.display = "none";
       });
 
       // Show and animate current cards sliding out
-      cards.slice(startIndex, endIndex).forEach(card => {
+      cards.slice(startIndex, endIndex).forEach((card) => {
         card.style.display = "block";
-        card.classList.remove('sliding-out-left', 'sliding-out-right', 'sliding-in-left', 'sliding-in-right');
+        card.classList.remove(
+          "sliding-out-left",
+          "sliding-out-right",
+          "sliding-in-left",
+          "sliding-in-right"
+        );
         card.classList.add(`sliding-out-${slideDirection}`);
       });
 
       // Show and animate next cards sliding in
-      cards.slice(nextStartIndex, nextEndIndex).forEach(card => {
+      cards.slice(nextStartIndex, nextEndIndex).forEach((card) => {
         card.style.display = "block";
-        card.classList.remove('sliding-out-left', 'sliding-out-right', 'sliding-in-left', 'sliding-in-right');
+        card.classList.remove(
+          "sliding-out-left",
+          "sliding-out-right",
+          "sliding-in-left",
+          "sliding-in-right"
+        );
         card.classList.add(`sliding-in-${slideDirection}`);
       });
 
@@ -299,7 +333,12 @@ async function displayPopularQuizzes() {
           // Hide all cards first
           card.style.display = "none";
           // Remove animation classes
-          card.classList.remove('sliding-out-left', 'sliding-out-right', 'sliding-in-left', 'sliding-in-right');
+          card.classList.remove(
+            "sliding-out-left",
+            "sliding-out-right",
+            "sliding-in-left",
+            "sliding-in-right"
+          );
           // Show only the cards that should be visible after animation
           if (index >= nextStartIndex && index < nextEndIndex) {
             card.style.display = "block";
@@ -312,14 +351,14 @@ async function displayPopularQuizzes() {
     const prevBtn = popularQuizGrid.querySelector(".prev-btn");
     const nextBtn = popularQuizGrid.querySelector(".next-btn");
 
-    prevBtn.addEventListener("click", function() {
+    prevBtn.addEventListener("click", function () {
       if (currentPage > 0) {
         updateCarousel.call(this);
         currentPage--;
       }
     });
 
-    nextBtn.addEventListener("click", function() {
+    nextBtn.addEventListener("click", function () {
       if (currentPage < totalPages - 1) {
         updateCarousel.call(this);
         currentPage++;
@@ -328,7 +367,7 @@ async function displayPopularQuizzes() {
 
     // Initial update without animation
     cards.forEach((card, index) => {
-      card.style.setProperty('--card-index', index % cardsPerPage);
+      card.style.setProperty("--card-index", index % cardsPerPage);
       if (index < cardsPerPage) {
         card.style.display = "block";
       } else {
@@ -346,36 +385,36 @@ document.addEventListener("DOMContentLoaded", () => {
   displayPopularQuizzes();
 
   // Add click handler for generate button
-  const generateBtn = document.querySelector('.generate-btn');
+  const generateBtn = document.querySelector(".generate-btn");
   if (generateBtn) {
-    generateBtn.addEventListener('click', (e) => {
+    generateBtn.addEventListener("click", (e) => {
       if (!isUserLoggedIn()) {
         e.preventDefault(); // Prevent default navigation
         // Show SweetAlert first
         Swal.fire({
-          icon: 'warning',
-          title: 'Authentication Required',
-          text: 'Please sign in to generate quizzes',
+          icon: "warning",
+          title: "Authentication Required",
+          text: "Please sign in to generate quizzes",
           showCancelButton: true,
-          confirmButtonText: 'Sign In',
-          cancelButtonText: 'Cancel'
+          confirmButtonText: "Sign In",
+          cancelButtonText: "Cancel",
         }).then((result) => {
           if (result.isConfirmed) {
             // Show the sign in modal if user clicks "Sign In"
             showSignInModal();
-            
+
             // Add one-time listener for successful login
             const checkLoginAndRedirect = () => {
               if (isUserLoggedIn()) {
-                window.location.href = '../QuizGenerate/QuizGenerate.html';
+                window.location.href = "../QuizGenerate/QuizGenerate.html";
               }
             };
-            
+
             // Check every second for 60 seconds (1 minute) if user has logged in
             const checkInterval = setInterval(() => {
               checkLoginAndRedirect();
             }, 1000);
-            
+
             // Clear interval after 1 minute
             setTimeout(() => {
               clearInterval(checkInterval);
@@ -384,23 +423,23 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       } else {
         // If logged in, allow navigation to QuizGenerate.html
-        window.location.href = '../QuizGenerate/QuizGenerate.html';
+        window.location.href = "../QuizGenerate/QuizGenerate.html";
       }
     });
   }
 
   // Check for auth message
-  const authMessage = sessionStorage.getItem('authMessage');
+  const authMessage = sessionStorage.getItem("authMessage");
   if (authMessage) {
     // Show the message
     Swal.fire({
-      icon: 'warning',
-      title: 'Authentication Required',
+      icon: "warning",
+      title: "Authentication Required",
       text: authMessage,
-      confirmButtonText: 'OK'
+      confirmButtonText: "OK",
     });
     // Clear the message
-    sessionStorage.removeItem('authMessage');
+    sessionStorage.removeItem("authMessage");
   }
 });
 
@@ -542,36 +581,36 @@ function playQuiz(quizId) {
   if (!isUserLoggedIn()) {
     // Show sign in modal with a message
     Swal.fire({
-      icon: 'warning',
-      title: 'Authentication Required',
-      text: 'Please sign in to play quizzes',
+      icon: "warning",
+      title: "Authentication Required",
+      text: "Please sign in to play quizzes",
       showCancelButton: true,
-      confirmButtonText: 'Sign In',
-      cancelButtonText: 'Cancel'
+      confirmButtonText: "Sign In",
+      cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
         // Show the sign in modal if user clicks "Sign In"
         showSignInModal();
-        
+
         // Store the quiz ID they were trying to play
-        sessionStorage.setItem('pendingQuizId', quizId);
-        
+        sessionStorage.setItem("pendingQuizId", quizId);
+
         // Add one-time listener for successful login
         const checkLoginAndRedirect = () => {
           if (isUserLoggedIn()) {
-            const pendingQuizId = sessionStorage.getItem('pendingQuizId');
+            const pendingQuizId = sessionStorage.getItem("pendingQuizId");
             if (pendingQuizId) {
-              sessionStorage.removeItem('pendingQuizId');
+              sessionStorage.removeItem("pendingQuizId");
               window.location.href = `../PlayQuiz/PlayQuiz.html?id=${pendingQuizId}`;
             }
           }
         };
-        
+
         // Check every second for 60 seconds (1 minute) if user has logged in
         const checkInterval = setInterval(() => {
           checkLoginAndRedirect();
         }, 1000);
-        
+
         // Clear interval after 1 minute
         setTimeout(() => {
           clearInterval(checkInterval);
