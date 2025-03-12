@@ -70,7 +70,7 @@ googleBtn.addEventListener("click", async () => {
     console.log("Got ID token from Firebase");
 
     console.log("Sending token to backend...");
-    const response = await fetch("http://2.59.135.31:3000/api/auth/google", {
+    const response = await fetch("https://devplus.ipaine.com/api/auth/google", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -136,16 +136,17 @@ function updateUIForLoggedInUser(user) {
   signInBtn.parentNode.insertBefore(profileBtn, signInBtn.nextSibling);
 
   // Add click handler to toggle menu
-  const profileMenu = profileBtn.querySelector('.profile-menu');
-  profileBtn.addEventListener('click', (e) => {
+  const profileMenu = profileBtn.querySelector(".profile-menu");
+  profileBtn.addEventListener("click", (e) => {
     e.stopPropagation();
-    profileMenu.style.display = profileMenu.style.display === 'none' ? 'block' : 'none';
+    profileMenu.style.display =
+      profileMenu.style.display === "none" ? "block" : "none";
   });
 
   // Close menu when clicking outside
-  document.addEventListener('click', (e) => {
+  document.addEventListener("click", (e) => {
     if (!profileBtn.contains(e.target)) {
-      profileMenu.style.display = 'none';
+      profileMenu.style.display = "none";
     }
   });
 }
@@ -159,14 +160,14 @@ async function signOut() {
 
     const signInBtn = document.getElementById("md-btn");
     const profileBtn = document.getElementById("profile-btn");
-    
+
     // Remove profile button and show sign in button
     if (profileBtn) {
       profileBtn.remove();
     }
     signInBtn.style.display = "block";
     signInBtn.textContent = "Sign in";
-    
+
     enableModalHandlers();
     console.log("Sign out successful");
     Swal.fire({
@@ -176,7 +177,7 @@ async function signOut() {
     });
   } catch (error) {
     Swal.fire({
-      title: "Error", 
+      title: "Error",
       text: "Sign out failed",
       icon: "error",
     });

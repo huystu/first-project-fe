@@ -30,7 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function hideLoading() {
     loadingOverlay.classList.remove("active");
-    document.querySelector(".quiz-container").classList.remove("loading-active");
+    document
+      .querySelector(".quiz-container")
+      .classList.remove("loading-active");
   }
 
   // Initialize quiz
@@ -47,13 +49,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const quizResponse = await fetch(`http://2.59.135.31:3000/api/quizzes/${quizId}`);
+      const quizResponse = await fetch(
+        `https://devplus.ipaine.com/api/quizzes/${quizId}`
+      );
       if (!quizResponse.ok) throw new Error("Failed to fetch quiz");
       currentQuiz = await quizResponse.json();
 
       const token = localStorage.getItem("token");
       const sessionResponse = await fetch(
-        `http://2.59.135.31:3000/api/sessions/active/${quizId}`,
+        `https://devplus.ipaine.com/api/sessions/active/${quizId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -101,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function createNewSession(quizId) {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://2.59.135.31:3000/api/sessions", {
+      const response = await fetch("https://devplus.ipaine.com/api/sessions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -126,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://2.59.135.31:3000/api/sessions/${currentSession._id}`,
+        `https://devplus.ipaine.com/api/sessions/${currentSession._id}`,
         {
           method: "PATCH",
           headers: {
@@ -163,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://2.59.135.31:3000/api/sessions/${currentSession._id}`,
+        `https://devplus.ipaine.com/api/sessions/${currentSession._id}`,
         {
           method: "PATCH",
           headers: {
@@ -202,14 +206,17 @@ document.addEventListener("DOMContentLoaded", () => {
     currentAnimationIndex = 0;
 
     const question = currentQuiz.questions[currentQuestionIndex];
-    questionCounter.textContent = `Question: ${currentQuestionIndex + 1}/${currentQuiz.questions.length}`;
+    questionCounter.textContent = `Question: ${currentQuestionIndex + 1}/${
+      currentQuiz.questions.length
+    }`;
     questionText.textContent = question.question;
 
     // Reset options state and set to "Loading..."
     optionButtons.forEach((button) => {
       button.classList.remove("visible", "correct", "wrong");
       button.disabled = true; // Keep disabled until all options are shown
-      document.querySelector(`#${button.id} .option-text`).textContent = "Loading..."; // Placeholder
+      document.querySelector(`#${button.id} .option-text`).textContent =
+        "Loading..."; // Placeholder
     });
 
     // Reset status message
@@ -230,7 +237,10 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     animationInProgress = true;
-    console.log("Starting animation in displayQuestion, currentAnimationIndex:", currentAnimationIndex);
+    console.log(
+      "Starting animation in displayQuestion, currentAnimationIndex:",
+      currentAnimationIndex
+    );
 
     for (; currentAnimationIndex < options.length; currentAnimationIndex++) {
       if (isPaused) {
@@ -238,8 +248,12 @@ document.addEventListener("DOMContentLoaded", () => {
         break; // Pause animation if popup is active
       }
       const button = document.getElementById(options[currentAnimationIndex].id);
-      console.log(`Showing option ${options[currentAnimationIndex].id} at index ${currentAnimationIndex}`);
-      document.querySelector(`#${options[currentAnimationIndex].id} .option-text`).textContent = options[currentAnimationIndex].text; // Update from "Loading..."
+      console.log(
+        `Showing option ${options[currentAnimationIndex].id} at index ${currentAnimationIndex}`
+      );
+      document.querySelector(
+        `#${options[currentAnimationIndex].id} .option-text`
+      ).textContent = options[currentAnimationIndex].text; // Update from "Loading..."
       button.classList.add("visible");
       await new Promise((resolve) => setTimeout(resolve, 400)); // 400ms per option
       // Do NOT enable button here; wait until all are shown
@@ -261,7 +275,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     clearInterval(timerInterval);
     timerInterval = setInterval(() => {
-      if (!isPaused) { // Only count down if not paused
+      if (!isPaused) {
+        // Only count down if not paused
         timeLeft--;
         updateTimer();
         if (timeLeft <= 0) {
@@ -342,12 +357,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Show status message
   function showStatus(isCorrect, timeLeft) {
-    statusMessage.className = `status-message show ${isCorrect ? "correct" : "wrong"}`;
+    statusMessage.className = `status-message show ${
+      isCorrect ? "correct" : "wrong"
+    }`;
     if (isCorrect) {
       const timeBonus = timeLeft * 10;
-      statusMessage.textContent = `Correct! +${100 + timeBonus} points (Time bonus: +${timeBonus})`;
+      statusMessage.textContent = `Correct! +${
+        100 + timeBonus
+      } points (Time bonus: +${timeBonus})`;
     } else {
-      statusMessage.textContent = "Wrong answer! The correct answer is highlighted.";
+      statusMessage.textContent =
+        "Wrong answer! The correct answer is highlighted.";
     }
   }
 
@@ -376,7 +396,14 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(timerInterval); // Stop timer
     const pausedTimeLeft = timeLeft; // Store current timeLeft
 
-    console.log("Paused at animationInProgress:", animationInProgress, "currentAnimationIndex:", currentAnimationIndex, "timeLeft:", timeLeft);
+    console.log(
+      "Paused at animationInProgress:",
+      animationInProgress,
+      "currentAnimationIndex:",
+      currentAnimationIndex,
+      "timeLeft:",
+      timeLeft
+    );
 
     const result = await Swal.fire({
       title: "Leave Quiz?",
@@ -409,10 +436,22 @@ document.addEventListener("DOMContentLoaded", () => {
   // Resume animation from paused point
   async function resumeAnimation(startIndex) {
     const options = [
-      { id: "optionA", text: currentQuiz.questions[currentQuestionIndex].answer_a },
-      { id: "optionB", text: currentQuiz.questions[currentQuestionIndex].answer_b },
-      { id: "optionC", text: currentQuiz.questions[currentQuestionIndex].answer_c },
-      { id: "optionD", text: currentQuiz.questions[currentQuestionIndex].answer_d },
+      {
+        id: "optionA",
+        text: currentQuiz.questions[currentQuestionIndex].answer_a,
+      },
+      {
+        id: "optionB",
+        text: currentQuiz.questions[currentQuestionIndex].answer_b,
+      },
+      {
+        id: "optionC",
+        text: currentQuiz.questions[currentQuestionIndex].answer_c,
+      },
+      {
+        id: "optionD",
+        text: currentQuiz.questions[currentQuestionIndex].answer_d,
+      },
     ];
 
     animationInProgress = true; // Indicate animation is resuming
@@ -426,7 +465,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       const button = document.getElementById(options[i].id);
       console.log(`Showing option ${options[i].id} at index ${i}`);
-      document.querySelector(`#${options[i].id} .option-text`).textContent = options[i].text; // Update from "Loading..."
+      document.querySelector(`#${options[i].id} .option-text`).textContent =
+        options[i].text; // Update from "Loading..."
       button.classList.add("visible");
       await new Promise((resolve) => setTimeout(resolve, 400)); // 400ms per option
       // Do NOT enable button here; wait until all are shown
@@ -444,7 +484,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Event listeners
   optionButtons.forEach((button) => {
-    button.addEventListener("click", () => handleAnswerSelection(button.dataset.choice));
+    button.addEventListener("click", () =>
+      handleAnswerSelection(button.dataset.choice)
+    );
   });
 
   backHomeBtn.addEventListener("click", handleBackHome);

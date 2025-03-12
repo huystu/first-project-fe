@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentQuizData = null;
 
   // Socket connection with reconnection options
-  const socket = io("http://2.59.135.31:3000", {
+  const socket = io("http://devplus.ipaine.com", {
     reconnection: true,
     reconnectionAttempts: 5,
     reconnectionDelay: 1000,
@@ -277,7 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Load quiz sets
         const token = localStorage.getItem("token");
         const response = await fetch(
-          "http://2.59.135.31:3000/api/quizzes/all",
+          "https://devplus.ipaine.com/api/quizzes/all",
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Fetch quiz details
     const quizResponse = await fetch(
-      `http://2.59.135.31:3000/api/quizzes/${quizId}`,
+      `https://devplus.ipaine.com/api/quizzes/${quizId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Fetch session details
     const sessionResponse = await fetch(
-      `http://2.59.135.31:3000/api/sessions/${sessionId}`,
+      `https://devplus.ipaine.com/api/sessions/${sessionId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Fetch leaderboard
     const leaderboardResponse = await fetch(
-      `http://2.59.135.31:3000/api/sessions/leaderboard/${quizId}`,
+      `https://devplus.ipaine.com/api/sessions/leaderboard/${quizId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

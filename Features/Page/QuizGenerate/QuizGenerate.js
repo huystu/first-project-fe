@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (isRegenerate && currentQuizId) {
         response = await fetch(
-          `http://2.59.135.31:3000/api/quizzes/regenerate/${currentQuizId}`,
+          `https://devplus.ipaine.com/api/quizzes/regenerate/${currentQuizId}`,
           {
             method: "POST",
             headers: {
@@ -72,14 +72,17 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         );
       } else {
-        response = await fetch("http://2.59.135.31:3000/api/quizzes/generate", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(quizData),
-        });
+        response = await fetch(
+          "https://devplus.ipaine.com/api/quizzes/generate",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(quizData),
+          }
+        );
       }
 
       if (!response.ok) {
@@ -139,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://2.59.135.31:3000/api/quizzes/${quizId}`,
+        `https://devplus.ipaine.com/api/quizzes/${quizId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -161,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://2.59.135.31:3000/api/quizzes/${quizId}`,
+        `https://devplus.ipaine.com/api/quizzes/${quizId}`,
         {
           method: "DELETE",
           headers: {
