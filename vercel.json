@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/", "dest": "/Features/Page/HomePage/HomePage.html" },
+    { "src": "/Features/(.*)", "dest": "/Features/$1" },
+    { "src": "/(.*)", "dest": "/Features/Page/HomePage/HomePage.html" }
+  ]
+}
