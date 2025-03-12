@@ -1,9 +1,6 @@
 {
   "version": 2,
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "destination": "https://first-project-fe.vercel.app/Features/Page/HomePage/HomPage.html"
-    }
+  "rewrites": [
+    { "source": "/home", "destination": "/Features/Page/HomePage/HomPage.html" }
   ]
 }
