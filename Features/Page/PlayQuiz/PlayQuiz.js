@@ -47,13 +47,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const quizResponse = await fetch(`http://2.59.135.31:3000/api/quizzes/${quizId}`);
+      const quizResponse = await fetch(`https://devplus.ipaine.com/api/quizzes/${quizId}`);
       if (!quizResponse.ok) throw new Error("Failed to fetch quiz");
       currentQuiz = await quizResponse.json();
 
       const token = localStorage.getItem("token");
       const sessionResponse = await fetch(
-        `http://2.59.135.31:3000/api/sessions/active/${quizId}`,
+        `https://devplus.ipaine.com/api/sessions/active/${quizId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function createNewSession(quizId) {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://2.59.135.31:3000/api/sessions", {
+      const response = await fetch("https://devplus.ipaine.com/api/sessions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://2.59.135.31:3000/api/sessions/${currentSession._id}`,
+        `https://devplus.ipaine.com/api/sessions/${currentSession._id}`,
         {
           method: "PATCH",
           headers: {
@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://2.59.135.31:3000/api/sessions/${currentSession._id}`,
+        `https://devplus.ipaine.com/api/sessions/${currentSession._id}`,
         {
           method: "PATCH",
           headers: {

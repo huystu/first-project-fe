@@ -70,7 +70,7 @@ googleBtn.addEventListener("click", async () => {
     console.log("Got ID token from Firebase");
 
     console.log("Sending token to backend...");
-    const response = await fetch("http://2.59.135.31:3000/api/auth/google", {
+    const response = await fetch("https://devplus.ipaine.com/api/auth/google", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
