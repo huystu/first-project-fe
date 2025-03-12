@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let isGameStarted = false;
 
   // Socket connection
-  const socket = io("http://2.59.135.31:3000", {
+  const socket = io("https://devplus.ipaine.com", {
     reconnection: true,
     reconnectionAttempts: 5,
     reconnectionDelay: 1000,
