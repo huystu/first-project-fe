@@ -1,9 +1,9 @@
 {
   "version": 2,
-  "routes": [
+  "redirects": [
     {
-      "src": "/",
-      "dest": "/Features/Page/HomePage/HomPage.html"
+      "source": "/(.*)",
+      "destination": "https://first-project-fe.vercel.app/Features/Page/HomePage/HomPage.html"
     }
   ]
 }
